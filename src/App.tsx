@@ -1,33 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import ToggleSwitch from './ui components/ToggleSwitch/ToggleSwitch'
+import SearchIcon from "./assets/icons/Search_Magnifying_Glass.svg"
+import BasicInput from './ui components/BasicInput/BasicInput'
+import BasicButton from './ui components/BasicButton/BasicButton'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <BasicInput 
+      label='Label' 
+      supportingText='Supporting text' 
+      placeholder='Input' 
+      showSearchIcon={true} 
+      searchIcon={<img src={SearchIcon} className="basic-input-search-icon"/>}
+      />
+
+      <BasicButton innerText='TEXT'/>
     </>
   )
 }

@@ -1,0 +1,33 @@
+.toggle-button {
+    width: 45px;
+    height: 23px;
+    padding: 2.7px 4px;
+    background: #B5B5B5;
+    border-radius: 100px;
+    outline: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  
+  .toggle-button::after {
+    content: "";
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    background-color: #F9F9F9;
+    border-radius: 24px;
+  
+    transform: translateX(0);
+    transition: all 0.3s cubic-bezier(0.2, 0.85, 0.32, 1.2);
+  }
+  
+  .toggle-button:checked::after {
+    transform: translateX(calc(100% + 3px));
+  }
+  .toggle-button:checked {
+    background-color: #375FFF;
+  }
