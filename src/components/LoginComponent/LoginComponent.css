@@ -1,0 +1,54 @@
+@font-face {
+    font-family: "Raleway-Regular";
+    src: url("../../assets/fonts/Raleway-Regular.ttf");
+}
+
+body {
+    display: flex; 
+    align-items: center;   
+    justify-content: center; 
+    height: 100vh;
+    overflow: hidden;
+}
+
+.login {
+    display: flex;
+    flex-direction: row;
+    gap: 53px;
+    justify-content: center;
+    
+}
+
+.login-illustration {
+    width: 40%;
+}
+
+.login-component {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    gap: 24px;
+    width: 622px;
+}
+
+.login-component-header {
+    font-weight: 500;
+    font-size: 40px;
+    font-family: Raleway-Regular;
+    color: #3A3A3A;
+    align-self: center;
+}
+
+.remember-me-container {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+}
+
+.remember-me-text {
+    font-weight: 500;
+    font-size: 14px;
+    font-family: Raleway-Regular;
+    color: #949494;
+}

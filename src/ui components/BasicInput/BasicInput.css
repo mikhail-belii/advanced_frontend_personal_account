@@ -43,8 +43,8 @@
 
 .basic-input-label {
     position: absolute;
-    top: -0.5px;
-    left: 18px;
+    margin-left: 10px;
+    margin-top: -8px;
     font-size: 14px;
     font-weight: 500;
     font-family: inherit;
