@@ -8,7 +8,6 @@ import { ChangeEvent, useEffect, useState } from "react"
 import { useAuthorization } from "../../context/AuthorizationContext"
 import api from "../../api/api"
 import { API_URL } from "../../constants"
-import { useNavigate } from "react-router-dom"
 import { NotificationPopup } from "../../ui components/NotificationPopup/NotificationPopup"
 import { useNotification } from "../../hooks/useNotification"
 import { useProtectedRoute } from "../../hooks/useProtectedRoute"
@@ -20,11 +19,10 @@ type LoginCreds = {
 }
 
 const LoginPage = () => {
-    const navigate = useNavigate()
     const [creds, setCreds] = useState<LoginCreds>({email: "", password: "", rememberMe: false})
     const [error, setError] = useState<string | null>(null)
     const [warning, setWarning] = useState<string | null>(null)
-    const {isAuthorized, login} = useAuthorization()
+    const {login} = useAuthorization()
     const {showNotification, setShowNotification, handleClose} = useNotification(false)
 
     useEffect(() => {
@@ -77,7 +75,6 @@ const LoginPage = () => {
 
             const {accessToken, refreshToken} = response.data
             login(accessToken, refreshToken)
-            navigate('/')
         }
         catch (err) {
             setError("Неверный Email или пароль")

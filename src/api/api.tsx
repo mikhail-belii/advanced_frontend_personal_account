@@ -1,7 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { API_URL } from "../constants";
 import { TokenPairDto } from "./models/models";
-import { useNavigate } from "react-router-dom";
 import { globalLogout } from "../context/AuthorizationContext";
 
 const api: AxiosInstance = axios.create({
