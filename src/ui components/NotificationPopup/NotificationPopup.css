@@ -20,7 +20,7 @@
       transform: translateX(0);
       opacity: 1;
     }
-  }
+}
 
 .popup-container-info {
     .popup-header-wrapper {
@@ -101,4 +101,29 @@
     font-weight: 400;
     font-family: Roboto-Regular;
     color: #393939;
+}
+
+@media only screen and (max-width: 376px) {
+    .popup-container {
+        width: 200px;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        animation: slide-mobile 0.3s ease-out;
+    }
+
+    .popup-info {
+        background-color: rgb(249, 249, 249);
+    }
+}
+
+@keyframes slide-mobile {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
 }

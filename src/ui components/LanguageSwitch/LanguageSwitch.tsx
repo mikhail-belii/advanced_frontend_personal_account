@@ -9,7 +9,17 @@ import "./LanguageSwitch.css"
 const LanguageSwitch = () => {
     const {language, setLanguage} = useLanguage()
     const [isOpen, setIsOpen] = useState(false)
+    const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 376)
     const dropdown = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsSmallScreen(window.innerWidth < 376)
+        }
+        window.addEventListener("resize", handleResize)
+
+        return () => window.removeEventListener("resize", handleResize)
+    }, [])
 
     const handleLanguageSwitch = (language: Language) => {
         setLanguage(language)
@@ -48,7 +58,9 @@ const LanguageSwitch = () => {
     return (
         <div className="language-switch" ref={dropdown}>
             <div className="selected-language" onClick={() => setIsOpen(!isOpen)}>
-                <span className="language-text">{languages.find((lang) => lang.value === language)?.label}</span>
+                {!isSmallScreen && (
+                    <span className="language-text">{languages.find((lang) => lang.value === language)?.label}</span>
+                )}
                 <div className="icons">
                     <img src={languages.find((lang) => lang.value === language)?.img} alt={language} className="flag"/>
                     <img src={isOpen? ARROW_UP: ARROW_DOWN} className="language-switch-arrow"/>

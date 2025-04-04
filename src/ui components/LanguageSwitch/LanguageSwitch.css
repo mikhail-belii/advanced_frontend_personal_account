@@ -12,7 +12,8 @@
 .selected-language {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: 8px;
     font-size: 16px;
     font-weight: 400;
     font-family: Roboto-Regular;
@@ -67,4 +68,12 @@
     margin-right: 8px;
     margin-top: 10px;
     padding-bottom: 4px;
+}
+
+@media only screen and (max-width: 376px) {
+    .language-switch {
+        position: relative;
+        width: 120px;
+        height: 24px;
+    }
 }

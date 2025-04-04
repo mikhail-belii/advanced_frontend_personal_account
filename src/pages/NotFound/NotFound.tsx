@@ -17,9 +17,11 @@ const NotFound = ({statusCode, statusMessageEN, statusMessageRU, description}: N
 
     useEffect(() => {
         document.body.classList.add("body-style")
+        document.getElementById("root")!.style.display = "block"
 
         return () => {
             document.body.classList.remove("body-style")
+            document.getElementById("root")!.style.display = "flex"
         }
     }, [])
 
