@@ -15,45 +15,42 @@ import ProfileDefault from "../../assets/icons/side-bar/Profile-Image-Blank.svg"
 import CollapsedIcon from "../../assets/icons/side-bar/Sidebar-Collapsed-Icon.svg"
 import ExtendedIcon from "../../assets/icons/side-bar/Sidebar-Extended-Icon.svg"
 import { useAuthorization } from "../../context/AuthorizationContext"
+import { useLanguage } from "../../context/LanguageContext"
 
 const Sidebar = () => {
     const [isExtended, setIsExtended] = useState(false)
     const navigate = useNavigate()
     const location = useLocation()
     const { userRole, profileImage } = useAuthorization()
+    const {translate} = useLanguage()
 
     const navItems = [
         {
             id: "profile",
-            text: "Профиль",
             path: "/profile",
             iconBlack: ProfileBlack,
             iconBlue: ProfileBlue
         },
         ...(userRole === "Admin" ? [{
             id: "admin",
-            text: "Администрирование",
             path: "/admin",
             iconBlack: AdministrationBlack,
             iconBlue: AdministrationBlue
         }] : []),
         {
             id: "certificates",
-            text: "Справки",
             path: "/certificates",
             iconBlack: CertificatesBlack,
             iconBlue: CertificatesBlue
         },
         {
             id: "usefulservices",
-            text: "Полезные сервисы",
             path: "/usefulservices",
             iconBlack: UsefulServicesBlack,
             iconBlue: UsefulServicesBlue
         },
         {
             id: "events",
-            text: "Мероприятия",
             path: "/events",
             iconBlack: EventsBlack,
             iconBlue: EventsBlue
@@ -85,10 +82,10 @@ const Sidebar = () => {
                     <span className="nav-icon">
                         <img
                         src={isActive ? item.iconBlue : item.iconBlack}
-                        alt={item.text}
+                        alt={translate(item.id)}
                         />
                     </span>
-                    <span className="nav-text">{item.text}</span>
+                    <span className="nav-text">{translate(item.id)}</span>
                     </button>
                 )
                 })}

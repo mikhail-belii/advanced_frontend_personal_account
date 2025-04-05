@@ -6,26 +6,22 @@ import NotFound from './pages/NotFound/NotFound'
 import './App.css'
 import Sidebar from './ui components/Sidebar/Sidebar'
 import { AuthorizationProvider, useAuthorization } from './context/AuthorizationContext'
+import ProfilePage from './pages/ProfilePage/ProfilePage'
+import { useLanguage } from './context/LanguageContext'
 
 const TitleUpdater = () => {
   const location = useLocation()
+  const {translate, language} = useLanguage()
 
   useEffect(() => {
-    const oops: string = "Упс..."
     const route: string = location.pathname
-    const title: string = PAGE_TITLES[route] || oops
+    const title: string = translate(PAGE_TITLES[route]) || translate(PAGE_TITLES["oops"])
     document.title = title
-  }, [location.pathname])
+  }, [location.pathname, language])
 
   return null
 }
 
-const ProfilePage = () => <>
-  <div className='app-content'>
-    <h1>Hello</h1>
-    <h2>Hellllllo</h2>
-  </div>
-</>;
 const AdminPage = () => <h1>Admin Page</h1>;
 const CertificatesPage = () => <h1>References Page</h1>;
 const UsefulServicesPage = () => <h1>Services Page</h1>;
@@ -40,7 +36,7 @@ const AppContent = () => {
       <TitleUpdater/>
       <Routes>
         <Route path='/' element={<div>Home Page</div>}/>
-        <Route path='/signin' element={<LoginPage/>}/>
+        <Route path='/login' element={<LoginPage/>}/>
         <Route path='*' element={<NotFound 
                                     statusCode={BASE_ERROR_PAGE.statusCode}
                                     statusMessageEN={BASE_ERROR_PAGE.statusMessageEN}

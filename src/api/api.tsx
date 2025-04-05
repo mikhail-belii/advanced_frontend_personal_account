@@ -11,7 +11,7 @@ const api: AxiosInstance = axios.create({
 })
 
 api.interceptors.request.use(config => {
-    const accessToken = localStorage.getItem("access_token")
+    const accessToken = localStorage.getItem("accessToken")
     if (accessToken && config.headers) {
         config.headers.Authorization = `Bearer ${accessToken}`
     }
@@ -32,10 +32,11 @@ api.interceptors.response.use(response => response,
                     throw new Error("Refresh token was not found")
                 }
 
-                const data : TokenPairDto = await axios.post(`${API_URL}/Auth/refresh`, {refreshToken}) 
+                const response = await axios.post(`${API_URL}/Auth/refresh`, {refreshToken}) 
+                const pair: TokenPairDto = response.data
 
-                const newAccessToken = data.accessToken
-                const newRefreshToken = data.refreshToken
+                const newAccessToken = pair.accessToken
+                const newRefreshToken = pair.refreshToken
 
                 if (newAccessToken && newRefreshToken) {
                     localStorage.setItem("accessToken", newAccessToken)
@@ -53,7 +54,7 @@ api.interceptors.response.use(response => response,
                 else {
                     localStorage.removeItem("accessToken")
                     localStorage.removeItem("refreshToken")
-                    window.location.href = "/signin"
+                    window.location.href = "/login"
                 }
                 return Promise.reject(refreshingError)
             }

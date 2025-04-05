@@ -1,0 +1,17 @@
+.personality-unit {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.personality-unit-label {
+    font-size: 14px;
+    font-family: Raleway-Medium;
+    color: #666666;
+}
+
+.personality-unit-text {
+    font-size: 16px;
+    font-family: Raleway-Medium;
+    color: #3A3A3A;
+}

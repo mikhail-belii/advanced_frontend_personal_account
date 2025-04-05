@@ -1,10 +1,12 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react"
+import { TRANSLATIONS } from "../utils/translations"
 
 export type Language = "ru" | "en"
 
 interface LanguageContextType {
     language: Language,
-    setLanguage: (language: Language) => void
+    setLanguage: (language: Language) => void,
+    translate: (key: string) => string
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
@@ -18,8 +20,12 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
         localStorage.setItem("language", language)
     }, [language])
 
+    const translate = (key: string) => {
+        return TRANSLATIONS[key]?.[language] || key
+    }
+
     return (
-        <LanguageContext.Provider value={{language, setLanguage}}>
+        <LanguageContext.Provider value={{language, setLanguage, translate}}>
             {children}
         </LanguageContext.Provider>
     )

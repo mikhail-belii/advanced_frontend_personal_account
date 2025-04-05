@@ -8,6 +8,7 @@ import CLOSE_GREEN from "../../assets/icons/notification-popup/Close-Green.svg"
 import CLOSE_RED from "../../assets/icons/notification-popup/Close-Red.svg"
 import CLOSE_ORANGE from "../../assets/icons/notification-popup/Close-Orange.svg"
 import { useEffect } from "react"
+import { useLanguage } from "../../context/LanguageContext"
 
 type NotificationPopupType = {
     type: "info" | "success" | "error" | "warning",
@@ -20,31 +21,29 @@ const config = {
     info: {
         icon: INFO,
         closeIcon: CLOSE_BLUE,
-        text: "Информация",
         color: "#2196F3"
     },
     success: {
         icon: SUCCESS,
         closeIcon: CLOSE_GREEN,
-        text: "Успех",
         color: "#39882C"
     },
     error: {
         icon: ERROR,
         closeIcon: CLOSE_RED,
-        text: "Ошибка",
         color: "#FF5757"
     },
     warning: {
         icon: WARNING,
         closeIcon: CLOSE_ORANGE,
-        text: "Предупреждение",
         color: "#E78400"
     },
 }
 
 export const NotificationPopup = ({type, innerText, onClose, lifeTime = 3000}: NotificationPopupType) => {
-    const {icon, closeIcon, text, color} = config[type]
+    const {translate} = useLanguage()
+    const {icon, closeIcon, color} = config[type]
+    const text = translate(type)
 
     useEffect(() => {
         if (lifeTime > 0) {

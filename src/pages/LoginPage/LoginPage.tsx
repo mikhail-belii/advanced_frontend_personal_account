@@ -11,6 +11,7 @@ import { API_URL } from "../../constants"
 import { NotificationPopup } from "../../ui components/NotificationPopup/NotificationPopup"
 import { useNotification } from "../../hooks/useNotification"
 import { useProtectedRoute } from "../../hooks/useProtectedRoute"
+import { useLanguage } from "../../context/LanguageContext"
 
 type LoginCreds = {
     email: string,
@@ -23,6 +24,7 @@ const LoginPage = () => {
     const [error, setError] = useState<string | null>(null)
     const [warning, setWarning] = useState<string | null>(null)
     const {login} = useAuthorization()
+    const {translate} = useLanguage()
     const {showNotification, setShowNotification, handleClose} = useNotification(false)
 
     useEffect(() => {
@@ -58,7 +60,7 @@ const LoginPage = () => {
             setWarning(null)
 
             if (creds.email === '' || creds.password === "") {
-                setWarning("Введите Email и пароль")
+                setWarning(translate("typeEmailAndPassword"))
                 setShowNotification(true)
                 return
             }
@@ -77,7 +79,7 @@ const LoginPage = () => {
             login(accessToken, refreshToken)
         }
         catch (err) {
-            setError("Неверный Email или пароль")
+            setError(translate("incorrectEmailOrPassword"))
             setShowNotification(true)
         }
     }
@@ -89,18 +91,18 @@ const LoginPage = () => {
                 <div className="login">
                     <img src={LoginIllustration} className="login-illustration"/>
                     <div className="login-component">
-                        <span className="login-component-header">Вход в аккаунт</span>
+                        <span className="login-component-header">{translate("loginHeader")}</span>
                         <div className="login-component-form">
                             <div className="inputs">
-                                <BasicInput label="Электронная почта" type="email" name="email" onChange={handleType}/>
-                                <BasicInput label="Пароль" type="password" name="password" onChange={handleType}/>
+                                <BasicInput label={translate("email")} type="email" name="email" onChange={handleType}/>
+                                <BasicInput label={translate("password")} type="password" name="password" onChange={handleType}/>
                             </div>
                             <div className="buttons">
                                 <div className="remember-me-container">
                                     <ToggleSwitch name="rememberMe" onChange={handleRemember}/>
-                                    <span className="remember-me-text">Запомнить меня</span>
+                                    <span className="remember-me-text">{translate("rememberMe")}</span>
                                 </div>
-                                <BasicButton innerText="ВОЙТИ" onClick={handleLogin}/>
+                                <BasicButton innerText={translate("login")} onClick={handleLogin}/>
                             </div>
                         </div>
                     </div>
