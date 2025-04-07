@@ -86,7 +86,9 @@ const LoginPage = () => {
 
     return (
         <>
-            <LanguageSwitch/>
+            <div className="login-page-language-switch">
+                <LanguageSwitch/>
+            </div>
             <div className="login-wrapper">
                 <div className="login">
                     <img src={LoginIllustration} className="login-illustration"/>

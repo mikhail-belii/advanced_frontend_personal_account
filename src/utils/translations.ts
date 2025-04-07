@@ -115,6 +115,78 @@ export const TRANSLATIONS: ITranslations = {
         ru: "Социальная сеть",
         en: "Social Media"
     },
+    faculty: {
+        ru: "Факультет",
+        en: "Faculty"
+    },
+    group: {
+        ru: "Группа",
+        en: "Group"
+    },
+    educationBase: {
+        ru: "База",
+        en: "Base"
+    },
+    educationDirection: {
+        ru: "Направление",
+        en: "Direction"
+    },
+    educationProfile: {
+        ru: "Профиль",
+        en: "Profile"
+    },
+    educationQualification: {
+        ru: "Квалификация",
+        en: "Qualification"
+    },
+    educationForm: {
+        ru: "Форма обучения",
+        en: "Education form"
+    },
+    educationYears: {
+        ru: "Года обучения",
+        en: "Education years"
+    },
+    creditBookNumber: {
+        ru: "Номер зачетной книги",
+        en: "Credit book number"
+    },
+    course: {
+        ru: "Курс",
+        en: "Course"
+    },
+    education: {
+        ru: "Образование",
+        en: "Education"
+    },
+    work: {
+        ru: "Работа",
+        en: "Work"
+    },
+    uploadingProfilePhoto: {
+        ru: "Загрузка фото профиля",
+        en: "Uploading profile photo"
+    },
+    zoom: {
+        ru: "Масштаб",
+        en: "Zoom"
+    },
+    upload: {
+        ru: "Загрузить",
+        en: "Upload"
+    },
+    uploading: {
+        ru: "Загрузка...",
+        en: "Uploading..."
+    },
+    cancel: {
+        ru: "Отмена",
+        en: "Cancel"
+    },
+    selectFileText: {
+        ru: "Выбрать файл",
+        en: "Select a file"
+    },
     oopsTitle: {
         ru: "Упс...",
         en: "Oops..."

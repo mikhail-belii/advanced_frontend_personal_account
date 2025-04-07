@@ -1,4 +1,3 @@
-import { useState } from "react"
 import "./PersonalityCard.css"
 import ProfileDefault from "../../assets/icons/side-bar/Profile-Image-Blank.svg"
 import PersonalityUnit from "./PersonalityUnit/PersonalityUnit"
@@ -42,27 +41,35 @@ export interface IProfile {
     citizenship: Citizenship,
     address: string | null,
     contacts: Contact[] | null,
-    userTypes: UserType[] | null
+    userTypes: UserType[] | null,
 }
 
-const PersonalityCard = ({...props}: IProfile) => {
+export interface IPersonalityCardProps extends IProfile {
+    onImageClick: () => void
+}
+
+const PersonalityCard = ({onImageClick, ...props}: IPersonalityCardProps) => {
     const {profileImage} = useAuthorization()
     const {language, translate} = useLanguage()
 
-    const [personalData] = useState({
-        [translate("gender")]: props.gender === "Male" ? [translate("genderMale")] : 
-                                props.gender === "Female" ? [translate("genderFemale")] : [translate("genderNotDefined")],
+    const personalData = {
+        [translate("gender")]:
+          props.gender === "Male"
+            ? translate("genderMale")
+            : props.gender === "Female"
+            ? translate("genderFemale")
+            : translate("genderNotDefined"),
         [translate("birthDate")]: formatDate(props.birthDate!, language) || props.birthDate,
         [translate("citizenship")]: props.citizenship?.name || translate("notDefined"),
-        [translate("email")]: props.email
-    })
+        [translate("email")]: props.email,
+    }
 
     const personalDataEntries = Object.entries(personalData)
     const contacts = props.contacts || []
 
     return (
         <div className="personality-card">
-            <div className="personality-card-profile-image">
+            <div className="personality-card-profile-image" onClick={onImageClick}>
                 <img src={profileImage || ProfileDefault} alt="Profile Image"/>
             </div>
             <div className="personality-card-personal-data">
@@ -71,7 +78,7 @@ const PersonalityCard = ({...props}: IProfile) => {
                     {personalDataEntries.map(([key, value], index) => (
                         <div key={key}>
                             <PersonalityUnit
-                            label={translate(key)}
+                            label={key}
                             text={typeof value === "string" ? value : String(value)}/>
                             {index < personalDataEntries.length - 1 && <hr className="divider"/>}
                         </div>

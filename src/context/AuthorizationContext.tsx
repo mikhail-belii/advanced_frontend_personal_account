@@ -9,7 +9,8 @@ type AuthorizationContextType = {
     login: (accessToken: string, refreshToken: string) => void,
     logout: () => void,
     userRole: string,
-    profileImage: string | null
+    profileImage: string | null,
+    fetchProfileImage: (token: string) => void
 }
 
 const AuthorizationContext = createContext<AuthorizationContextType | undefined>(undefined)
@@ -99,7 +100,7 @@ export const AuthorizationProvider = ({children}: {children: ReactNode}) => {
     }, [logout])
 
     return (
-        <AuthorizationContext.Provider value={{isAuthorized, login, logout, userRole, profileImage}}>
+        <AuthorizationContext.Provider value={{isAuthorized, login, logout, userRole, profileImage, fetchProfileImage}}>
             {children}
         </AuthorizationContext.Provider>
     )
