@@ -14,14 +14,17 @@ import EventsBlue from "../../assets/icons/side-bar/Navbar/Blue/Sidebar-Events-B
 import ProfileDefault from "../../assets/icons/side-bar/Profile-Image-Blank.svg"
 import CollapsedIcon from "../../assets/icons/side-bar/Sidebar-Collapsed-Icon.svg"
 import ExtendedIcon from "../../assets/icons/side-bar/Sidebar-Extended-Icon.svg"
+import HamburgerIcon from "../../assets/icons/Hamburger.svg"
+import CloseIcon from "../../assets/icons/Close-Icon.svg"
 import { useAuthorization } from "../../context/AuthorizationContext"
 import { useLanguage } from "../../context/LanguageContext"
 
 const Sidebar = () => {
     const [isExtended, setIsExtended] = useState(false)
+    const [isMobileOpen, setIsMobileOpen] = useState(false)
     const navigate = useNavigate()
     const location = useLocation()
-    const { userRole, profileImage } = useAuthorization()
+    const {userRole, profileImage} = useAuthorization()
     const {translate} = useLanguage()
 
     const navItems = [
@@ -61,36 +64,50 @@ const Sidebar = () => {
         setIsExtended(!isExtended)
     }
 
+    const toggleMobileSidebar = () => {
+        setIsMobileOpen(!isMobileOpen)
+    }
+
     return (
-        <div className={`sidebar ${isExtended ? 'extended' : 'collapsed'}`}>
-            <button className="extend-button" onClick={toggleSidebar}>
-              <img src={isExtended ? ExtendedIcon : CollapsedIcon} alt="Icon"/>
+        <>
+            <button className="hamburger-button" onClick={toggleMobileSidebar}>
+                <img src={isMobileOpen ? CloseIcon : HamburgerIcon}/>
             </button>
 
-            <div className="profile-icon">
-                <img src={profileImage || ProfileDefault} alt="Profile" />
+            <div className={`sidebar ${isExtended ? 'extended' : 'collapsed'} ${isMobileOpen ? "mobile-open" : "mobile-closed"}`}>
+                <button className="extend-button" onClick={toggleSidebar}>
+                <img src={isExtended ? ExtendedIcon : CollapsedIcon} alt="Icon"/>
+                </button>
+
+                {!isMobileOpen && (
+                <div className="profile-icon">
+                    <img src={profileImage || ProfileDefault} alt="Profile" />
+                </div>
+                )}
+
+                <nav className="sidebar-nav">
+                    {navItems.map((item) => {
+                    const isActive = location.pathname.startsWith(item.path)
+                    return (
+                        <button
+                        key={item.id}
+                        className={`nav-item ${isActive ? 'active' : ''}`}
+                        onClick={() => {
+                            navigate(item.path)
+                            setIsMobileOpen(false)
+                        }}>
+                        <span className="nav-icon">
+                            <img
+                            src={isActive ? item.iconBlue : item.iconBlack}
+                            alt={translate(item.id)}/>
+                        </span>
+                        <span className="nav-text">{translate(item.id)}</span>
+                        </button>
+                    )
+                    })}
+                </nav>
             </div>
-    
-            <nav className="sidebar-nav">
-                {navItems.map((item) => {
-                const isActive = location.pathname.startsWith(item.path)
-                return (
-                    <button
-                    key={item.id}
-                    className={`nav-item ${isActive ? 'active' : ''}`}
-                    onClick={() => navigate(item.path)}>
-                    <span className="nav-icon">
-                        <img
-                        src={isActive ? item.iconBlue : item.iconBlack}
-                        alt={translate(item.id)}
-                        />
-                    </span>
-                    <span className="nav-text">{translate(item.id)}</span>
-                    </button>
-                )
-                })}
-            </nav>
-        </div>
+        </>
       )
 }
 

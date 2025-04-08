@@ -167,6 +167,22 @@ export const TRANSLATIONS: ITranslations = {
         ru: "Загрузка фото профиля",
         en: "Uploading profile photo"
     },
+    fetchProfileError: {
+        ru: "Ошибка загрузки профиля",
+        en: "Error while loading profile"
+    },
+    fetchProfileSuccess: {
+        ru: "Профиль успешно загружен",
+        en: "Profile was loaded successfully"
+    },
+    uploadingProfilePhotoSuccess: {
+        ru: "Фото профиля успешно загружено",
+        en: "Profile photo was uploaded successfully"
+    },
+    uploadingProfilePhotoError: {
+        ru: "Ошибка загрузки фото профиля",
+        en: "Error while uploading profile photo"
+    },
     zoom: {
         ru: "Масштаб",
         en: "Zoom"

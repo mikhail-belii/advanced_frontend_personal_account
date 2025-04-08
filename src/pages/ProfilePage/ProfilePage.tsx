@@ -9,6 +9,8 @@ import LanguageSwitch from "../../ui components/LanguageSwitch/LanguageSwitch"
 import ProfileActivityNavigationButton from "../../ui components/ProfileActivityNavigationButton/ProfileActivityNavigationButton"
 import ImageCropModal from "../../ui components/ImageCropModal/ImageCropModal"
 import { useAuthorization } from "../../context/AuthorizationContext"
+import { useNotification } from "../../hooks/useNotification"
+import { NotificationPopup } from "../../ui components/NotificationPopup/NotificationPopup"
 
 const ProfilePage = () => {
     const {translate} = useLanguage()
@@ -17,6 +19,21 @@ const ProfilePage = () => {
     const [educationEntries, setEducationEntries] = useState<IEducationEntry[] | null>(null)
     const [activeSection, setActiveSection] = useState<string | null>(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 901)
+
+    const [success, setSuccess] = useState<string | null>(null)
+    const [error, setError] = useState<string | null>(null)
+    const {showNotification, setShowNotification, handleClose} = useNotification(false)
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsSmallScreen(window.innerWidth < 901)
+        }
+        window.addEventListener("resize", handleResize)
+
+        return () => window.removeEventListener("resize", handleResize)
+    }, [])
+    
 
     const fetchProfile = async () => {
         try {
@@ -37,11 +54,14 @@ const ProfilePage = () => {
         }
         catch (e) {
             console.error(e)
+            throw e
         }
     }
 
     const fetchEducationEntries = async () => {
         try {
+            setError(null)
+
             const response = await api.get(`${API_URL}/profile/student`)
             if (response.status === 200) {
                 let entries: IEducationEntry[] = []
@@ -68,15 +88,32 @@ const ProfilePage = () => {
         }
         catch (e) {
             console.error(e)
+            setError(translate("fetchProfileError"))
+            setShowNotification(true)
         }
     }
 
     useEffect(() => {
-        fetchProfile()
+        try {
+            setError(null)
+            setSuccess(null)
+            fetchProfile()
+            setSuccess(translate("fetchProfileSuccess"))
+            setShowNotification(true)
+        }
+        catch (e) {
+            console.error(e)
+            setError(translate("fetchProfileError"))
+            setShowNotification(true)
+        }
+        
     }, [])
 
     const handleUploadSuccess = async (fileId: string) => {
         try {
+            setError(null)
+            setSuccess(null)
+
             const updateResponse = await api.put(`${API_URL}/profile/avatar`, {
                 fileId
             })
@@ -84,9 +121,13 @@ const ProfilePage = () => {
             if (updateResponse.status === 200) {
                 fetchProfile()
             }
+            setSuccess(translate("uploadingProfilePhotoSuccess"))
+            setShowNotification(true)
         }
         catch (e) {
             console.error(e)
+            setError(translate("uploadingProfilePhotoError"))
+            setShowNotification(true)
         }
     }
     
@@ -97,6 +138,11 @@ const ProfilePage = () => {
                     <div className="profile-header-name">{translate("profileTitle")}</div>
                     <LanguageSwitch/>
                 </div>
+                {isSmallScreen && (
+                        <div className="profile-activity-username">
+                            {`${profile?.lastName || ""} ${profile?.firstName || ""} ${profile?.patronymic || ""}`}
+                        </div>
+                    )}
                 <div className="profile-content">
 
                     {profile ? (
@@ -105,9 +151,12 @@ const ProfilePage = () => {
                         <p>Loading</p>
                     )}
                     <div className="profile-activity">
-                        <div className="profile-activity-username">
-                            {`${profile?.lastName || ""} ${profile?.firstName || ""} ${profile?.patronymic || ""}`}
-                        </div>
+                        {!isSmallScreen && (
+                            <div className="profile-activity-username">
+                                {`${profile?.lastName || ""} ${profile?.firstName || ""} ${profile?.patronymic || ""}`}
+                            </div>
+                        )}
+
                         <div className="profile-activity-navigation">
                             {educationEntries && (
                                 <ProfileActivityNavigationButton 
@@ -130,6 +179,12 @@ const ProfilePage = () => {
                     onClose={() => setIsModalOpen(false)}
                     onUploadSuccess={handleUploadSuccess}/>
             </div>
+            {showNotification && success && (
+                <NotificationPopup type="success" innerText={success} onClose={handleClose}/>
+            )}
+            {showNotification && error && (
+                <NotificationPopup type="error" innerText={error} onClose={handleClose}/>
+            )}
         </>
     )
 }
