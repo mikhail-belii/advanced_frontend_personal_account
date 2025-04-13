@@ -23,6 +23,7 @@
 @media (max-width: 1200px) {
     .sidebar {
         position: absolute;
+        left: auto;
         display: block;
         width: 118px;
         z-index: 100;
@@ -95,9 +96,6 @@
 }
 
 .hamburger-button {
-    position: fixed;
-    top: 15px;
-    left: 15px;
     border: none;
     background: none;
     cursor: pointer;

@@ -1,0 +1,48 @@
+.certificate-download-button {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    border-radius: 8px;
+    padding: 6px 8px;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+
+    &.certificate {
+        background-color: #375fff;
+
+        span {
+            color: #fff;
+        }
+
+        &:hover {
+            background-color: #002fea;
+        }
+        &:active {
+            background-color: #204cff;
+        }
+    }
+
+    &.signature {
+        background-color: #fff;
+        border: 1px solid #375fff;
+
+        span {
+            color: #375fff;
+        }
+
+        &:hover {
+            background-color: #eaeeff;
+        }
+        &:active {
+            background-color: #e0e6ff;
+        }
+    }
+
+    span {
+        font-size: 14px;
+        font-family: Roboto-Regular;
+    }
+}

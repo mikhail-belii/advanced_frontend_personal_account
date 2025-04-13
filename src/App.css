@@ -18,6 +18,11 @@
     src: url("./assets/fonts/Raleway-Medium.ttf");
 }
 
+@font-face {
+    font-family: "Raleway-SemiBold";
+    src: url("./assets/fonts/Raleway-SemiBold.ttf");
+}
+
 body {
     margin: 0;
 }

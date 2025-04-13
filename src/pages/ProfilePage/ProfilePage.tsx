@@ -11,15 +11,21 @@ import ImageCropModal from "../../ui components/ImageCropModal/ImageCropModal"
 import { useAuthorization } from "../../context/AuthorizationContext"
 import { useNotification } from "../../hooks/useNotification"
 import { NotificationPopup } from "../../ui components/NotificationPopup/NotificationPopup"
+import Sidebar from "../../ui components/Sidebar/Sidebar"
+import EmployeeCard, { IEmployee } from "../../ui components/EmployeeCard/EmployeeCard"
+import { UserRoleEnum } from "../CertificatesPage/CertificatesPage"
 
 const ProfilePage = () => {
     const {translate} = useLanguage()
-    const {fetchProfileImage} = useAuthorization()
+    const {isAuthorized, fetchProfileImage} = useAuthorization()
     const [profile, setProfile] = useState<IProfile | null>(null)
     const [educationEntries, setEducationEntries] = useState<IEducationEntry[] | null>(null)
-    const [activeSection, setActiveSection] = useState<string | null>(null)
+    const [userTypes, setUserTypes] = useState<UserRoleEnum[] | null>(null)
+    const [employeeData, setEmployeeData] = useState<IEmployee | null>(null)
+    const [activeSection, setActiveSection] = useState<UserRoleEnum | null>(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 901)
+    const [isHamburger, setIsHamburger] = useState(window.innerWidth < 1201)
 
     const [success, setSuccess] = useState<string | null>(null)
     const [error, setError] = useState<string | null>(null)
@@ -33,13 +39,21 @@ const ProfilePage = () => {
 
         return () => window.removeEventListener("resize", handleResize)
     }, [])
-    
+    useEffect(() => {
+        const handleResize = () => {
+            setIsHamburger(window.innerWidth < 1201)
+        }
+        window.addEventListener("resize", handleResize)
+
+        return () => window.removeEventListener("resize", handleResize)
+    }, [])
 
     const fetchProfile = async () => {
         try {
             const response = await api.get(`${API_URL}/profile`)
             if (response.status === 200) {
                 setProfile(response.data)
+                setUserTypes(response.data.userTypes)
 
                 const token = localStorage.getItem("accessToken")
                 if (token) {
@@ -48,7 +62,10 @@ const ProfilePage = () => {
 
                 if (response.data.userTypes.includes("Student")) {
                     fetchEducationEntries()
-                    setActiveSection("education")
+                    setActiveSection("Student")
+                }
+                if (response.data.userTypes.includes("Employee")) {
+                    fetchEmployee()
                 }
             }
         }
@@ -93,13 +110,25 @@ const ProfilePage = () => {
         }
     }
 
-    useEffect(() => {
+    const fetchEmployee = async () => {
         try {
             setError(null)
-            setSuccess(null)
-            fetchProfile()
-            setSuccess(translate("fetchProfileSuccess"))
+
+            const response = await api.get(`${API_URL}/profile/employee`)
+            if (response.status === 200) {
+                setEmployeeData(response.data)
+            }
+        }
+        catch (e) {
+            console.error(e)
+            setError(translate("fetchProfileError"))
             setShowNotification(true)
+        }
+    }
+
+    useEffect(() => {
+        try {
+            fetchProfile()
         }
         catch (e) {
             console.error(e)
@@ -133,11 +162,14 @@ const ProfilePage = () => {
     
     return (
         <>
+            {(isAuthorized && !isHamburger) && <Sidebar/>}
             <div className="app-content">
                 <div className="profile-header">
-                    <div className="profile-header-name">{translate("profileTitle")}</div>
+                    {isHamburger && <Sidebar/>}
+                    {!isHamburger && <div className="profile-header-name">{translate("profileTitle")}</div>}
                     <LanguageSwitch/>
                 </div>
+                {isHamburger && <div className="profile-header-name">{translate("profileTitle")}</div>}
                 {isSmallScreen && (
                         <div className="profile-activity-username">
                             {`${profile?.lastName || ""} ${profile?.firstName || ""} ${profile?.patronymic || ""}`}
@@ -161,16 +193,23 @@ const ProfilePage = () => {
                             {educationEntries && (
                                 <ProfileActivityNavigationButton 
                                     text={translate("education")}
-                                    isActive={activeSection === "education"}
-                                    onClick={() => setActiveSection("education")}/>
+                                    isActive={activeSection === "Student"}
+                                    onClick={() => setActiveSection("Student")}/>
+                            )}
+                            {employeeData && (
+                                <ProfileActivityNavigationButton 
+                                    text={translate("work")}
+                                    isActive={activeSection === "Employee"}
+                                    onClick={() => setActiveSection("Employee")}/>
                             )}
                         </div>
-                        {educationEntries ? (
+                        {(educationEntries && activeSection === "Student") && (
                             educationEntries.map(entry => 
                                 <EducationCard key={entry.id} {...entry}/>
                             )
-                        ) : (
-                            <p>Loading</p>
+                        )}
+                        {(employeeData && activeSection === "Employee") && (
+                            <EmployeeCard {...employeeData}/>
                         )}
                     </div>
                 </div>

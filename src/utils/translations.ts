@@ -171,6 +171,10 @@ export const TRANSLATIONS: ITranslations = {
         ru: "Ошибка загрузки профиля",
         en: "Error while loading profile"
     },
+    fetchError: {
+        ru: "Ошибка загрузки данных",
+        en: "Error while loading data"
+    },
     fetchProfileSuccess: {
         ru: "Профиль успешно загружен",
         en: "Profile was loaded successfully"
@@ -203,6 +207,182 @@ export const TRANSLATIONS: ITranslations = {
         ru: "Выбрать файл",
         en: "Select a file"
     },
+    certificateCreated: {
+        ru: "Создано",
+        en: "Created"
+    },
+    certificateInProcess: {
+        ru: "В работе",
+        en: "In process"
+    },
+    certificateFinishedElectronic: {
+        ru: "Готово",
+        en: "Finished"
+    },
+    certificateFinishedPaper: {
+        ru: "Заказано",
+        en: "Ordered"
+    },
+    Electronic: {
+        ru: "Электронная",
+        en: "Electronic"
+    },
+    ForPlaceWhereNeeded: {
+        ru: "для предъявления по месту требования",
+        en: "For place where needed"
+    },
+    PensionForKazakhstan: {
+        ru: "для пенсионных выплат",
+        en: "For pension payments"
+    },
+    ForPlaceOfWork: {
+        ru: "с места работы",
+        en: "For place of work"
+    },
+    ForExperience: {
+        ru: "о стаже",
+        en: "For experience"
+    },
+    ForVisa: {
+        ru: "на оформление визы",
+        en: "For visa"
+    },
+    ForWorkBookCopy: {
+        ru: "для копии трудовой книжки",
+        en: "For work book copy"
+    },
+    Certificate: {
+        ru: "Справка",
+        en: "Certificate"
+    },
+    Signature: {
+        ru: "Подпись",
+        en: "Signature"
+    },
+    Paper: {
+        ru: "Бумажная",
+        en: "Paper"
+    },
+    certificateUnitLabel: {
+        ru: "Справка от",
+        en: "Certificate dated"
+    },
+    certificateType: {
+        ru: "Тип справки",
+        en: "Certificate type"
+    },
+    certificateFormingDateTime: {
+        ru: "Дата и время формирования справки",
+        en: "Certificate forming date and time"
+    },
+    certificateReceiveType: {
+        ru: "Вид справки",
+        en: "Certificate receive type"
+    },
+    select: {
+        ru: "Выбрать",
+        en: "Select"
+    },
+    main: {
+        ru: "Главная",
+        en: "Main"
+    },
+    certificateOrder: {
+        ru: "Заказ справки",
+        en: "Certificate order"
+    },
+    userType: {
+        ru: "Тип пользователя",
+        en: "User type"
+    },
+    student: {
+        ru: "Студент",
+        en: "Student"
+    },
+    employee: {
+        ru: "Сотрудник",
+        en: "Employee"
+    },
+    educationLevel: {
+        ru: "Уровень образования",
+        en: "Education level"
+    },
+    certificatesOrderTitle: {
+        ru: "Заказать справку",
+        en: "Order a certificate"
+    },
+    status: {
+        ru: "Статус",
+        en: "Status"
+    },
+    order: {
+        ru: "Заказать",
+        en: "Order"
+    },
+    MainPlace: {
+        ru: "Основное место работы",
+        en: "Main place"
+    },
+    PartTime: {
+        ru: "Совместительство",
+        en: "Part-time"
+    },
+    InnerPartTime: {
+        ru: "Внутреннее совместительство",
+        en: "Inner part-time"
+    },
+    Freelance: {
+        ru: "Подработка",
+        en: "Freelance"
+    },
+    post: {
+        ru: "Должность",
+        en: "Post"
+    },
+    rate: {
+        ru: "Ставка",
+        en: "Rate"
+    },
+    placeOfWork: {
+        ru: "Место работы",
+        en: "Place of work"
+    },
+    postType: {
+        ru: "Тип должности",
+        en: "Post type"
+    },
+    employmentType: {
+        ru: "Вид занятости",
+        en: "Employment type"
+    },
+    dateStart: {
+        ru: "Дата приема на работу",
+        en: "Date of employment"
+    },
+    dateEnd: {
+        ru: "Дата увольнения",
+        en: "Date of dismissal"
+    },
+    experience: {
+        ru: "Стаж",
+        en: "Experience"
+    },
+    certificateRequestCreated: {
+        ru: "Заявка на справку создана",
+        en: "Certificate request created"
+    },
+    fillAllFields: {
+        ru: "Заполните все поля",
+        en: "Fill all fields"
+    },
+    createCertificateError: {
+        ru: "Ошибка создания справки",
+        en: "Error creating certificate"
+    },
+    certificateAlreadyInWork: {
+        ru: "Данный тип справки находится в работе, заказать новую нельзя",
+        en: "This type of certificate is in process, you can't order a new one"
+    },
     oopsTitle: {
         ru: "Упс...",
         en: "Oops..."
@@ -218,5 +398,9 @@ export const TRANSLATIONS: ITranslations = {
     profileTitle: {
         ru: "Профиль",
         en: "Profile"
+    },
+    certificatesTitle: {
+        ru: "Справки",
+        en: "Certificates"
     },
 }

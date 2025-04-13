@@ -1,0 +1,49 @@
+.certificate-unit {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    padding: 8px 0px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.certificate-unit-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.certificate-unit-content-label {
+    font-size: 16px;
+    font-family: Raleway-Medium;
+    font-variant-numeric: lining-nums;
+    color: #3A3A3A;
+    align-content: center;
+}
+
+.certificate-unit-content-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.certificate-unit-content-info-certificate-type, .certificate-unit-content-info-date,
+    .certificate-unit-content-info-receive-type {
+        font-size: 14px;
+        font-family: Raleway-Medium;
+        font-variant-numeric: lining-nums;
+        color: #666666;
+}
+
+.certificate-unit-buttons-and-status {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.certificate-unit-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}

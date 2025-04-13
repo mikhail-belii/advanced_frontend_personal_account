@@ -1,0 +1,13 @@
+.certificate-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-family: Raleway-SemiBold;
+    color: #F9F9F9;
+    border-radius: 8px;
+    padding: 5px 12px;
+    width: fit-content;
+    cursor: default;
+    user-select: none;
+}

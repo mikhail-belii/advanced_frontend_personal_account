@@ -5,7 +5,7 @@ import { useAuthorization } from "../../context/AuthorizationContext"
 import { formatDate } from "../../utils/formatDate"
 import { useLanguage } from "../../context/LanguageContext"
 
-export type Avatar = {
+export type FileDto = {
     id: string,
     name: string | null,
     extension: string,
@@ -37,7 +37,7 @@ export interface IProfile {
     patronymic: string | null,
     birthDate: string | null,
     gender: Gender,
-    avatar: Avatar,
+    avatar: FileDto,
     citizenship: Citizenship,
     address: string | null,
     contacts: Contact[] | null,
