@@ -6,11 +6,12 @@ import formatDateTime from "../../utils/formatDateTime"
 import CertificateDownloadButton from "../CertificateDownloadButton/CertificateDownloadButton"
 import CertificateStatus, { CertificateReceiveType, CertificateStatusEnum, CertificateType } from "../CertificateStatus/CertificateStatus"
 import "./CertificateUnit.css"
+import { CertificateStaffTypeEnum } from "../../pages/CertificatesPage/CertificatesPage"
 
 export type CertificateUnitProps = {
     status: CertificateStatusEnum,
     receiveType: CertificateReceiveType,
-    type: CertificateType,
+    type: CertificateType | CertificateStaffTypeEnum,
     createDate: string,
     formDate?: string,
     certificateId?: string,

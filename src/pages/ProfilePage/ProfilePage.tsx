@@ -161,7 +161,7 @@ const ProfilePage = () => {
     }
     
     return (
-        <>
+        <div className="profile-page">
             {(isAuthorized && !isHamburger) && <Sidebar/>}
             <div className="app-content">
                 <div className="profile-header">
@@ -224,7 +224,7 @@ const ProfilePage = () => {
             {showNotification && error && (
                 <NotificationPopup type="error" innerText={error} onClose={handleClose}/>
             )}
-        </>
+        </div>
     )
 }
 

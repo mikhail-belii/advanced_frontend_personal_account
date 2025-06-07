@@ -27,10 +27,7 @@ body {
     margin: 0;
 }
 
-#root {
-    display: flex;
-}
-
 .app-content {
+    width: 100%;
     padding-left: 82px;
 }

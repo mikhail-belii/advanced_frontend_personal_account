@@ -383,6 +383,14 @@ export const TRANSLATIONS: ITranslations = {
         ru: "Данный тип справки находится в работе, заказать новую нельзя",
         en: "This type of certificate is in process, you can't order a new one"
     },
+    goToTheWebsite: {
+        ru: "Перейти на сайт",
+        en: "Go to the website"
+    },
+    termsOfDistribution : {
+        ru: "Условия предоставления",
+        en: "Terms of distribution"
+    },
     oopsTitle: {
         ru: "Упс...",
         en: "Oops..."
@@ -403,4 +411,8 @@ export const TRANSLATIONS: ITranslations = {
         ru: "Справки",
         en: "Certificates"
     },
+    usefulServicesTitle: {
+        ru: "Полезные сервисы",
+        en: "Useful services"
+    }
 }

@@ -55,7 +55,7 @@ export interface ICertificate {
     id: string,
     status: CertificateStatusEnum
     statusEnumDto: EnumDto,
-    type: CertificateType,
+    type?: CertificateType,
     staffType?: CertificateStaffTypeEnum,
     typeEnumDto: EnumDto,
     staffTypeEnumDto?: EnumDto,
@@ -234,7 +234,6 @@ const CertificatesPage = () => {
             setIsSmallScreen(window.innerWidth < 901)
             setIsHamburger(window.innerWidth < 1201)
             setIsLessThan600(window.innerWidth < 601)
-            console.log(window.innerWidth)
         }
         window.addEventListener("resize", handleResize)
 
@@ -264,7 +263,7 @@ const CertificatesPage = () => {
     }, [activeSection, activeEducationEntry, activeEmployeePost])
 
     return (
-        <>
+        <div className="certificates-page">
             {(isAuthorized && !isHamburger) && <Sidebar/>}
             <div className="app-content">
                 <div className="certificates-page-header">
@@ -391,7 +390,7 @@ const CertificatesPage = () => {
                                         <CertificateUnit
                                             key={index}
                                             status={certificate.status}
-                                            type={certificate.type}
+                                            type={certificate.type ?? "ForPlaceWhereNeeded"}
                                             receiveType={certificate.receiveType}
                                             createDate={certificate.dateOfForming!}
                                             formDate={certificate.signatureFile ? getDateFromFileName(certificate.signatureFile) ?? certificate.dateOfForming!: certificate.dateOfForming!}
@@ -470,10 +469,10 @@ const CertificatesPage = () => {
                                         <CertificateUnit
                                             key={index}
                                             status={certificate.status}
-                                            type={certificate.type}
+                                            type={certificate.staffType ?? "ForPlaceOfWork"}
                                             receiveType={certificate.receiveType}
                                             createDate={certificate.dateOfForming!}
-                                            formDate={certificate.signatureFile ? getDateFromFileName(certificate.signatureFile) ?? certificate.dateOfForming!: certificate.dateOfForming!}
+                                            formDate={certificate.signatureFile ? getDateFromFileName(certificate.signatureFile) ?? certificate.dateOfForming! : certificate.dateOfForming!}
                                             certificateId={certificate.certificateFile?.id}
                                             signatureId={certificate.signatureFile?.id}/>))
 
@@ -493,7 +492,7 @@ const CertificatesPage = () => {
             {showNotification && success && (
                 <NotificationPopup type="success" innerText={success} onClose={handleClose}/>
             )}
-        </>
+        </div>
     )
 }
 

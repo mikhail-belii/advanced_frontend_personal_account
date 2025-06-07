@@ -8,6 +8,8 @@ import { AuthorizationProvider } from './context/AuthorizationContext'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
 import { useLanguage } from './context/LanguageContext'
 import CertificatesPage from './pages/CertificatesPage/CertificatesPage'
+import ProtectedRoute from './api/models/ProtectedRoute'
+import UsefulServicesPage from './pages/UsefulServicesPage/UsefulServicesPage'
 
 const TitleUpdater = () => {
   const location = useLocation()
@@ -23,7 +25,6 @@ const TitleUpdater = () => {
 }
 
 const AdminPage = () => <h1>Admin Page</h1>;
-const UsefulServicesPage = () => <h1>Services Page</h1>;
 const EventsPage = () => <h1>Events Page</h1>;
 
 const AppContent = () => {
@@ -36,7 +37,11 @@ const AppContent = () => {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/certificates" element={<CertificatesPage />} />
-        <Route path="/usefulservices" element={<UsefulServicesPage />} />
+        <Route path="/usefulservices" element={
+          <ProtectedRoute>
+            <UsefulServicesPage />
+          </ProtectedRoute>
+        } />
         <Route path="/events" element={<EventsPage />} />
         <Route path='*' element={<NotFound 
                                     statusCode={BASE_ERROR_PAGE.statusCode}
