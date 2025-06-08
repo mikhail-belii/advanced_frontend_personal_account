@@ -5,12 +5,14 @@ import { FileDto } from "../../ui components/PersonalityCard/PersonalityCard"
 import Sidebar from "../../ui components/Sidebar/Sidebar"
 import UsefulServiceCard from "../../ui components/UsefulServiceCard/UsefulServiceCard"
 import LanguageSwitch from "../../ui components/LanguageSwitch/LanguageSwitch"
-import { useNavigate } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import "./UsefulServicesPage.css"
 import api from "../../api/api"
 import { API_URL } from "../../constants"
 import { useNotification } from "../../hooks/useNotification"
 import { NotificationPopup } from "../../ui components/NotificationPopup/NotificationPopup"
+import PaginationArrowLeft from "../../assets/icons/Pagination_Arrow_Left.svg"
+import PaginationArrowRight from "../../assets/icons/Pagination_Arrow_Right.svg"
 
 export type PagedListMetaData = {
     pageCount: number,
@@ -46,28 +48,39 @@ const UsefulServicesPage = () => {
     const {translate} = useLanguage()
     const {isAuthorized} = useAuthorization()
     const [isHamburger, setIsHamburger] = useState(window.innerWidth < 1201)
-    const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
+    let initialPageSize = Number(searchParams.get("pageSize")) || 2
+    if (initialPageSize > 50) initialPageSize = 50
     const [usefulServices, setUsefulServices] = useState<UsefulServiceDto[]>([])
     const [userRoles, setUserRoles] = useState<string[]>([])
-    const [currentPage, setCurrentPage] = useState(1)
-    const [pageSize] = useState(10)
+    const [currentPage, setCurrentPage] = useState(Number(searchParams.get("page")) || 1)
+    const [pageSize, setPageSize] = useState(initialPageSize)
     const [totalPages, setTotalPages] = useState(1)
     const [error, setError] = useState<string | null>(null)
     const {showNotification, setShowNotification, handleClose} = useNotification(false)
-
-    useEffect(() => {
-        if (!isAuthorized) {
-            navigate("/", { replace: true });
-        }
-    }, [isAuthorized, navigate]);
+    const [logoUrls, setLogoUrls] = useState<{[id: string]: string}>({})
 
     useEffect(() => {
         const handleResize = () => {
             setIsHamburger(window.innerWidth < 1201)
         }
         window.addEventListener("resize", handleResize)
-
         return () => window.removeEventListener("resize", handleResize)
+    }, [])
+
+    useEffect(() => {
+        let safePageSize = pageSize
+        if (pageSize > 50) safePageSize = 50
+        if (safePageSize !== pageSize) setPageSize(50)
+        setSearchParams({ page: String(currentPage), pageSize: String(safePageSize) })
+    }, [currentPage, pageSize, setSearchParams])
+
+    useEffect(() => {
+        const pageParam = Number(searchParams.get("page")) || 1
+        let pageSizeParam = Number(searchParams.get("pageSize")) || 2
+        if (pageSizeParam > 50) pageSizeParam = 50
+        setCurrentPage(pageParam)
+        setPageSize(pageSizeParam)
     }, [])
 
     useEffect(() => {
@@ -86,6 +99,31 @@ const UsefulServicesPage = () => {
         fetchData()
     }, [currentPage, pageSize])
 
+    useEffect(() => {
+        const fetchLogos = async () => {
+            const logosToFetch = usefulServices.filter(s => s.logo && s.logo.id && !logoUrls[s.logo.id])
+            const newLogoUrls: {[id: string]: string} = {}
+            await Promise.all(logosToFetch.map(async (service) => {
+                try {
+                    const response = await api.get(`${API_URL}/files/${service.logo.id}`, { 
+                            responseType: 'blob' })
+                    const blob = response.data
+                    const url = URL.createObjectURL(blob)
+                    newLogoUrls[service.logo.id] = url
+                } 
+                catch (e) {
+                    newLogoUrls[service.logo.id] = ''
+                }
+            }))
+            if (Object.keys(newLogoUrls).length > 0) {
+                setLogoUrls(prev => ({...prev, ...newLogoUrls}))
+            }
+        }
+        if (usefulServices.length > 0) {
+            fetchLogos()
+        }
+    }, [usefulServices])
+
     const fetchUserRoles = async() => {
         try {
             const response = await api.get(`${API_URL}/profile`)
@@ -102,19 +140,64 @@ const UsefulServicesPage = () => {
 
     const fetchUsefulServices = async(page: number, pageSize: number) => {
         try {
-            const response = await api.get(`${API_URL}/usefulservices?page=${page}&pageSize=${pageSize}`)
+            let categories: string[] = []
+            if (userRoles.length === 0 ||
+                (userRoles.includes('Student') && userRoles.includes('Employee'))) {
+                categories = ['ForAll', 'Students', 'Employees']
+            } 
+            else if (userRoles.includes('Student')) {
+                categories = ['ForAll', 'Students']
+            } 
+            else if (userRoles.includes('Employee')) {
+                categories = ['ForAll', 'Employees']
+            }
+            const params = new URLSearchParams()
+            params.append('page', String(page))
+            params.append('pageSize', String(pageSize))
+            categories.forEach(cat => params.append('categories', cat))
+            const response = await api.get(`${API_URL}/usefulservices?${params.toString()}`)
             if (response.status === 200) {
                 setUsefulServices(response.data.results || [])
                 setTotalPages(response.data.metaData?.pageCount || 1)
             }
         }
-        catch (e) {}
+        catch (e) {
+            console.error(e)
+            throw e
+        }
     }
 
     const handlePageChange = (page: number) => {
         if (page >= 1 && page <= totalPages) {
             setCurrentPage(page)
         }
+    }
+
+    const getPagination = () => {
+        const pages = []
+        if (totalPages <= 5) {
+            for (let i = 1; i <= totalPages; i++) pages.push(i)
+        } 
+        else {
+            if (currentPage <= 3) {
+                pages.push(1,2,3,4,5)
+                pages.push('dots')
+                pages.push(totalPages)
+            } 
+            else if (currentPage >= totalPages - 2) {
+                pages.push(1)
+                pages.push('dots')
+                for (let i = totalPages - 4; i <= totalPages; i++) pages.push(i)
+            } 
+            else {
+                pages.push(1)
+                pages.push('dots')
+                pages.push(currentPage-1, currentPage, currentPage+1)
+                pages.push('dots')
+                pages.push(totalPages)
+            }
+        }
+        return pages
     }
 
     return (
@@ -134,37 +217,58 @@ const UsefulServicesPage = () => {
 
                 <div className="useful-services-page-content">
                     <div className="useful-services-content">
-                        {usefulServices.map((service) => (
-                            <UsefulServiceCard 
-                                key={service.id}
-                                title={service.title}
-                                description={service.description}
-                                link={service.link}
-                                termsOfDisctribution={service.termsOfDisctribution}
-                                logo={typeof service.logo === "string" ? service.logo : service.logo?.name || ""}
-                            />
-                        ))}
+                        {usefulServices.map((service) => {
+                            let logoUrl = ''
+                            if (service.logo && service.logo.id && logoUrls[service.logo.id]) {
+                                logoUrl = logoUrls[service.logo.id]
+                            }
+                            return (
+                                <UsefulServiceCard 
+                                    key={service.id}
+                                    title={service.title}
+                                    description={service.description}
+                                    link={service.link}
+                                    termsOfDisctribution={service.termsOfDisctribution}
+                                    logo={logoUrl}
+                                />
+                            )
+                        })}
                     </div>
-
-                    <div style={{ display: "flex", justifyContent: "center", marginTop: 20 }}>
-                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                    <div className="pagination-container">
+                        <div className="pagination-arrow-left">
                             <button
-                                key={page}
-                                onClick={() => handlePageChange(page)}
-                                style={{
-                                    margin: "0 4px",
-                                    padding: "6px 12px",
-                                    background: page === currentPage ? "#375fff" : "#fff",
-                                    color: page === currentPage ? "#fff" : "#375fff",
-                                    border: "1px solid #375fff",
-                                    borderRadius: 4,
-                                    cursor: "pointer"
-                                }}
-                                disabled={page === currentPage}
+                                className="pagination-arrow"
+                                onClick={() => handlePageChange(currentPage - 1)}
+                                disabled={currentPage === 1}
                             >
-                                {page}
+                                <img src={PaginationArrowLeft} alt="left" />
                             </button>
-                        ))}
+                        </div>
+                        <div className="pagination-pages">
+                            {getPagination().map((page, idx) =>
+                                page === 'dots' ? (
+                                    <span key={"dots"+idx} className="pagination-dots">...</span>
+                                ) : (
+                                    <button
+                                        key={page}
+                                        className={`pagination-btn${page === currentPage ? ' active' : ''}`}
+                                        onClick={() => handlePageChange(Number(page))}
+                                        disabled={page === currentPage}
+                                    >
+                                        {page}
+                                    </button>
+                                )
+                            )}
+                        </div>
+                        <div className="pagination-arrow-right">
+                            <button
+                                className="pagination-arrow"
+                                onClick={() => handlePageChange(currentPage + 1)}
+                                disabled={currentPage === totalPages}
+                            >
+                                <img src={PaginationArrowRight} alt="right" />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

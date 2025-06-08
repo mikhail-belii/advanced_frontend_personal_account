@@ -32,13 +32,25 @@ const AppContent = () => {
     <>
       <TitleUpdater/>
       <Routes>
-        <Route path='/' element={<div>Home Page</div>}/>
+        <Route path='/' element={<EventsPage />}/>
         <Route path='/login' element={<LoginPage/>}/>
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/admin" element={<AdminPage />} />
-        <Route path="/certificates" element={<CertificatesPage />} />
+        <Route path="/profile" element={
+          <ProtectedRoute requiredRoles={['Default', 'Admin']}>
+            <ProfilePage />
+          </ProtectedRoute>
+        } />
+        <Route path="/admin" element={
+          <ProtectedRoute requiredRoles={['Admin']}>
+            <AdminPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/certificates" element={
+          <ProtectedRoute requiredRoles={['Default', 'Admin']}>
+            <CertificatesPage />
+          </ProtectedRoute>
+        } />
         <Route path="/usefulservices" element={
-          <ProtectedRoute>
+          <ProtectedRoute requiredRoles={['Default', 'Admin']}>
             <UsefulServicesPage />
           </ProtectedRoute>
         } />

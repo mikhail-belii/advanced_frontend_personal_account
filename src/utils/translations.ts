@@ -395,9 +395,9 @@ export const TRANSLATIONS: ITranslations = {
         ru: "Упс...",
         en: "Oops..."
     },
-    homeTitle: {
-        ru: "Главная",
-        en: "Home"
+    eventsTitle: {
+        ru: "Мероприятия",
+        en: "Events"
     },
     loginTitle: {
         ru: "Вход",

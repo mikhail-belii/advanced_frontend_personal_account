@@ -1,6 +1,7 @@
 import { useLanguage } from "../../context/LanguageContext"
 import RedirectionButton from "../RedirectionButton/RedirectionButton"
 import "./UsefulServiceCard.css"
+import BlankImage from "../../assets/images/Image_Blank.jpg"
 
 export type UsefulServiceCardProps = {
     title?: string,
@@ -22,7 +23,7 @@ const UsefulServiceCard = ({title, description, link, termsOfDisctribution, logo
                 {description}
             </div>
             <div className="useful-service-card-image">
-                <img src={logo} alt="logo" />
+                <img src={logo || BlankImage} alt="logo" />
             </div>
             <div className="useful-service-card-redirect">
                 <RedirectionButton text={translate("goToTheWebsite")} link={link || "example.com"} />
