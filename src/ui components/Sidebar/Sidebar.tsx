@@ -15,16 +15,19 @@ import ProfileDefault from "../../assets/icons/side-bar/Profile-Image-Blank.svg"
 import CollapsedIcon from "../../assets/icons/side-bar/Sidebar-Collapsed-Icon.svg"
 import ExtendedIcon from "../../assets/icons/side-bar/Sidebar-Extended-Icon.svg"
 import HamburgerIcon from "../../assets/icons/Hamburger.svg"
-import CloseIcon from "../../assets/icons/Close-Icon.svg"
+import LogoutIcon from "../../assets/icons/side-bar/Exit-Icon.svg"
 import { useAuthorization } from "../../context/AuthorizationContext"
 import { useLanguage } from "../../context/LanguageContext"
+import api from "../../api/api"
+import { API_URL } from "../../constants"
 
 const Sidebar = () => {
     const [isExtended, setIsExtended] = useState(false)
     const [isMobileOpen, setIsMobileOpen] = useState(false)
+    const [showLogout, setShowLogout] = useState(false)
     const navigate = useNavigate()
     const location = useLocation()
-    const {userRole, profileImage} = useAuthorization()
+    const {userRole, profileImage, logout} = useAuthorization()
     const {translate} = useLanguage()
 
     const navItems = [
@@ -62,53 +65,90 @@ const Sidebar = () => {
     
     const toggleSidebar = () => {
         setIsExtended(!isExtended)
+        if (isExtended) {
+            setShowLogout(false)
+        }
     }
 
     const toggleMobileSidebar = () => {
         setIsMobileOpen(!isMobileOpen)
+        if (!isMobileOpen) {
+            setShowLogout(false)
+        }
+    }
+
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 1200
+
+    const handleProfileClick = () => {
+        setShowLogout(!showLogout)
+    }
+
+    const handleLogout = async () => {
+        try {
+            const response = await api.post(`${API_URL}/auth/logout`)
+            if (response.status === 200) {
+                logout()
+                setShowLogout(false)
+            }
+        } 
+        catch (e) {
+            console.error(e)
+        }
     }
 
     return (
         <>
             <button className="hamburger-button" onClick={toggleMobileSidebar}>
-                <img src={isMobileOpen ? CloseIcon : HamburgerIcon}/>
+                <img src={HamburgerIcon}/>
             </button>
 
-            <div className={`sidebar ${isExtended ? 'extended' : 'collapsed'} ${isMobileOpen ? "mobile-open" : "mobile-closed"}`}>
-                <button className="extend-button" onClick={toggleSidebar}>
-                <img src={isExtended ? ExtendedIcon : CollapsedIcon} alt="Icon"/>
-                </button>
+            {isMobile && isMobileOpen && <div className="sidebar-overlay" onClick={() => setIsMobileOpen(false)}></div>}
 
-                {!isMobileOpen && (
-                <div className="profile-icon">
-                    <img src={profileImage || ProfileDefault} alt="Profile" />
-                </div>
+            <div
+                className={`sidebar ${isMobile ? (isMobileOpen ? 'mobile-open' : 'mobile-closed') 
+                    : (isExtended ? 'extended' : 'collapsed')}`}>
+                {!isMobile && (
+                    <button className="extend-button" onClick={toggleSidebar}>
+                        <img src={isExtended ? ExtendedIcon : CollapsedIcon} alt="Icon"/>
+                    </button>
                 )}
+
+                <div className="profile-section">
+                    <div className="profile-icon" onClick={handleProfileClick}>
+                        <img src={profileImage || ProfileDefault} alt="Profile" />
+                    </div>
+                    {showLogout && (
+                        <button className="logout-button" onClick={handleLogout}>
+                            <span className="logout-text">{translate("exit")}</span>
+                            <img src={LogoutIcon} alt="Logout" className="logout-icon" />
+                        </button>
+                    )}
+                </div>
 
                 <nav className="sidebar-nav">
                     {navItems.map((item) => {
-                    const isActive = location.pathname.startsWith(item.path)
-                    return (
-                        <button
-                        key={item.id}
-                        className={`nav-item ${isActive ? 'active' : ''}`}
-                        onClick={() => {
-                            navigate(item.path)
-                            setIsMobileOpen(false)
-                        }}>
-                        <span className="nav-icon">
-                            <img
-                            src={isActive ? item.iconBlue : item.iconBlack}
-                            alt={translate(item.id)}/>
-                        </span>
-                        <span className="nav-text">{translate(item.id)}</span>
-                        </button>
-                    )
+                        const isActive = location.pathname.startsWith(item.path)
+                        return (
+                            <button
+                                key={item.id}
+                                className={`nav-item ${isActive ? 'active' : ''}`}
+                                onClick={() => {
+                                    navigate(item.path)
+                                    setIsMobileOpen(false)
+                                }}>
+                                <span className="nav-icon">
+                                    <img
+                                        src={isActive ? item.iconBlue : item.iconBlack}
+                                        alt={translate(item.id)}/>
+                                </span>
+                                <span className="nav-text">{translate(item.id)}</span>
+                            </button>
+                        )
                     })}
                 </nav>
             </div>
         </>
-      )
+    )
 }
 
 export default Sidebar

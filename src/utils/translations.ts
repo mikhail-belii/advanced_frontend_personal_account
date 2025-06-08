@@ -391,6 +391,10 @@ export const TRANSLATIONS: ITranslations = {
         ru: "Условия предоставления",
         en: "Terms of distribution"
     },
+    exit: {
+        ru: "Выйти",
+        en: "Exit"
+    },
     oopsTitle: {
         ru: "Упс...",
         en: "Oops..."
