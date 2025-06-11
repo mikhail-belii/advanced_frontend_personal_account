@@ -1,0 +1,61 @@
+.event-short-card {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 12px 24px;
+}
+
+.event-short-card-picture {
+    img {
+        width: 175px;
+        border-radius: 8px;
+    }
+}
+
+.event-short-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.event-short-card-content-title {
+    font-size: 20px;
+    font-family: Raleway-Medium;
+    color: #3A3A3A;
+    font-variant-numeric: lining-nums;
+}
+
+.event-short-card-content-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.event-short-card-content-info-finished {
+    padding: 5px 12px;
+    background-color: #46B34A;
+    color: #F9F9F9;
+    border-radius: 8px;
+    width: fit-content;
+    font-size: 16px;
+    font-family: Raleway-Semibold;
+}
+
+.event-short-card-content-info-unit {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.event-short-card-content-info-label {
+    font-size: 14px;
+    font-family: Raleway-Medium;
+    color: #666666;
+}
+
+.event-short-card-content-info-text {
+    font-size: 16px;
+    font-family: Raleway-Medium;
+    color: #3A3A3A;
+    font-variant-numeric: lining-nums;
+}

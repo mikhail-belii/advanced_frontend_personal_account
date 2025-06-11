@@ -395,6 +395,46 @@ export const TRANSLATIONS: ITranslations = {
         ru: "Выйти",
         en: "Exit"
     },
+    eventFinished: {
+        ru: "Завершилось",
+        en: "Finished"
+    },
+    eventDate: {
+        ru: "Дата(ы) проведения",
+        en: "Event date(s)"
+    },
+    eventFormat: {
+        ru: "Формат мероприятия",
+        en: "Event format"
+    },
+    noEventDate: {
+        ru: "Нет даты проведения",
+        en: "No event date"
+    },
+    Finished: {
+        ru: "Завершилось",
+        en: "Finished"
+    },
+    Draft: {
+        ru: "Черновик",
+        en: "Draft"
+    },
+    Actual: {
+        ru: "Активное",
+        en: "Actual"
+    },
+    Archive: {
+        ru: "Архив",
+        en: "Archive"
+    },
+    Online: {
+        ru: "Онлайн",
+        en: "Online"
+    },
+    Offline: {
+        ru: "Офлайн",
+        en: "Offline"
+    },
     oopsTitle: {
         ru: "Упс...",
         en: "Oops..."
