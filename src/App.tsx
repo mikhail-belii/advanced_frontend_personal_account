@@ -10,6 +10,7 @@ import { useLanguage } from './context/LanguageContext'
 import CertificatesPage from './pages/CertificatesPage/CertificatesPage'
 import ProtectedRoute from './api/models/ProtectedRoute'
 import UsefulServicesPage from './pages/UsefulServicesPage/UsefulServicesPage'
+import EventsPage from './pages/EventsPage/EventsPage'
 
 const TitleUpdater = () => {
   const location = useLocation()
@@ -25,7 +26,6 @@ const TitleUpdater = () => {
 }
 
 const AdminPage = () => <h1>Admin Page</h1>;
-const EventsPage = () => <h1>Events Page</h1>;
 
 const AppContent = () => {
   return (
@@ -33,6 +33,7 @@ const AppContent = () => {
       <TitleUpdater/>
       <Routes>
         <Route path='/' element={<EventsPage />}/>
+        <Route path="/events" element={<EventsPage />} />
         <Route path='/login' element={<LoginPage/>}/>
         <Route path="/profile" element={
           <ProtectedRoute requiredRoles={['Default', 'Admin']}>
@@ -54,13 +55,11 @@ const AppContent = () => {
             <UsefulServicesPage />
           </ProtectedRoute>
         } />
-        <Route path="/events" element={<EventsPage />} />
         <Route path='*' element={<NotFound 
                                     statusCode={BASE_ERROR_PAGE.statusCode}
                                     statusMessageEN={BASE_ERROR_PAGE.statusMessageEN}
                                     statusMessageRU={BASE_ERROR_PAGE.statusMessageRU}
                                     description={BASE_ERROR_PAGE.description}/>}/>
-        
       </Routes>
     </>
   )

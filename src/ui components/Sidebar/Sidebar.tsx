@@ -127,7 +127,9 @@ const Sidebar = () => {
 
                 <nav className="sidebar-nav">
                     {navItems.map((item) => {
-                        const isActive = location.pathname.startsWith(item.path)
+                        const isActive = item.path === "/events" 
+                            ? location.pathname === "/" || location.pathname.startsWith(item.path)
+                            : location.pathname.startsWith(item.path)
                         return (
                             <button
                                 key={item.id}
