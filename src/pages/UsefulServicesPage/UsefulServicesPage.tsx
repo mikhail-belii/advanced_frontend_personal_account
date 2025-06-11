@@ -52,7 +52,7 @@ const UsefulServicesPage = () => {
     let initialPageSize = Number(searchParams.get("pageSize")) || 2
     if (initialPageSize > 50) initialPageSize = 50
     const [usefulServices, setUsefulServices] = useState<UsefulServiceDto[]>([])
-    const [userRoles, setUserRoles] = useState<string[]>([])
+    const [userRoles, setUserRoles] = useState<string[] | null>(null)
     const [currentPage, setCurrentPage] = useState(Number(searchParams.get("page")) || 1)
     const [pageSize, setPageSize] = useState(initialPageSize)
     const [totalPages, setTotalPages] = useState(1)
@@ -88,7 +88,6 @@ const UsefulServicesPage = () => {
             try {
                 setError(null)
                 await fetchUserRoles()
-                await fetchUsefulServices(currentPage, pageSize)
             }
             catch (e) {
                 console.error(e)
@@ -97,7 +96,24 @@ const UsefulServicesPage = () => {
             }
         }
         fetchData()
-    }, [currentPage, pageSize])
+    }, [])
+
+    useEffect(() => {
+        if (userRoles !== null) {
+            const fetchServices = async () => {
+                try {
+                    setError(null)
+                    await fetchUsefulServices(currentPage, pageSize)
+                }
+                catch (e) {
+                    console.error(e)
+                    setError(translate("fetchProfileError"))
+                    setShowNotification(true)
+                }
+            }
+            fetchServices()
+        }
+    }, [currentPage, pageSize, userRoles])
 
     useEffect(() => {
         const fetchLogos = async () => {
@@ -139,31 +155,33 @@ const UsefulServicesPage = () => {
     }
 
     const fetchUsefulServices = async(page: number, pageSize: number) => {
-        try {
-            let categories: string[] = []
-            if (userRoles.length === 0 ||
-                (userRoles.includes('Student') && userRoles.includes('Employee'))) {
-                categories = ['ForAll', 'Students', 'Employees']
-            } 
-            else if (userRoles.includes('Student')) {
-                categories = ['ForAll', 'Students']
-            } 
-            else if (userRoles.includes('Employee')) {
-                categories = ['ForAll', 'Employees']
+        if (userRoles != null) {
+            try {
+                let categories: string[] = []
+                if (userRoles.length === 0 ||
+                    (userRoles.includes('Student') && userRoles.includes('Employee'))) {
+                    categories = ['ForAll', 'Students', 'Employees']
+                } 
+                else if (userRoles.includes('Student')) {
+                    categories = ['ForAll', 'Students']
+                } 
+                else if (userRoles.includes('Employee')) {
+                    categories = ['ForAll', 'Employees']
+                }
+                const params = new URLSearchParams()
+                params.append('page', String(page))
+                params.append('pageSize', String(pageSize))
+                categories.forEach(cat => params.append('categories', cat))
+                const response = await api.get(`${API_URL}/usefulservices?${params.toString()}`)
+                if (response.status === 200) {
+                    setUsefulServices(response.data.results || [])
+                    setTotalPages(response.data.metaData?.pageCount || 1)
+                }
             }
-            const params = new URLSearchParams()
-            params.append('page', String(page))
-            params.append('pageSize', String(pageSize))
-            categories.forEach(cat => params.append('categories', cat))
-            const response = await api.get(`${API_URL}/usefulservices?${params.toString()}`)
-            if (response.status === 200) {
-                setUsefulServices(response.data.results || [])
-                setTotalPages(response.data.metaData?.pageCount || 1)
+            catch (e) {
+                console.error(e)
+                throw e
             }
-        }
-        catch (e) {
-            console.error(e)
-            throw e
         }
     }
 
