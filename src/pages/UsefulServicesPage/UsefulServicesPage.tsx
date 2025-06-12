@@ -8,7 +8,7 @@ import LanguageSwitch from "../../ui components/LanguageSwitch/LanguageSwitch"
 import { useSearchParams } from "react-router-dom"
 import "./UsefulServicesPage.css"
 import api from "../../api/api"
-import { API_URL } from "../../constants"
+import { API_URL, USEFUL_SERVICES_PAGE_PAGESIZE } from "../../constants"
 import { useNotification } from "../../hooks/useNotification"
 import { NotificationPopup } from "../../ui components/NotificationPopup/NotificationPopup"
 import PaginationArrowLeft from "../../assets/icons/Pagination_Arrow_Left.svg"
@@ -49,7 +49,7 @@ const UsefulServicesPage = () => {
     const {isAuthorized} = useAuthorization()
     const [isHamburger, setIsHamburger] = useState(window.innerWidth < 1201)
     const [searchParams, setSearchParams] = useSearchParams();
-    let initialPageSize = Number(searchParams.get("pageSize")) || 2
+    let initialPageSize = Number(searchParams.get("pageSize")) || USEFUL_SERVICES_PAGE_PAGESIZE
     if (initialPageSize > 50) initialPageSize = 50
     const [usefulServices, setUsefulServices] = useState<UsefulServiceDto[]>([])
     const [userRoles, setUserRoles] = useState<string[] | null>(null)
@@ -77,7 +77,7 @@ const UsefulServicesPage = () => {
 
     useEffect(() => {
         const pageParam = Number(searchParams.get("page")) || 1
-        let pageSizeParam = Number(searchParams.get("pageSize")) || 2
+        let pageSizeParam = Number(searchParams.get("pageSize")) || USEFUL_SERVICES_PAGE_PAGESIZE
         if (pageSizeParam > 50) pageSizeParam = 50
         setCurrentPage(pageParam)
         setPageSize(pageSizeParam)
@@ -247,8 +247,7 @@ const UsefulServicesPage = () => {
                                     description={service.description}
                                     link={service.link}
                                     termsOfDisctribution={service.termsOfDisctribution}
-                                    logo={logoUrl}
-                                />
+                                    logo={logoUrl}/>
                             )
                         })}
                     </div>
@@ -269,7 +268,7 @@ const UsefulServicesPage = () => {
                                 ) : (
                                     <button
                                         key={page}
-                                        className={`pagination-btn${page === currentPage ? ' active' : ''}`}
+                                        className={`pagination-btn${page === currentPage ? ' active-red' : ''}`}
                                         onClick={() => handlePageChange(Number(page))}
                                         disabled={page === currentPage}
                                     >

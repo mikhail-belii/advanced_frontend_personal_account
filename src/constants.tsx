@@ -17,3 +17,7 @@ export const BASE_ERROR_PAGE: NotFoundProps = {
 }
 
 export const API_URL = "https://lk-stud.api.kreosoft.space/api"
+
+export const USEFUL_SERVICES_PAGE_PAGESIZE = 2
+
+export const EVENTS_PAGE_PAGESIZE = 4

@@ -435,6 +435,22 @@ export const TRANSLATIONS: ITranslations = {
         ru: "Офлайн",
         en: "Offline"
     },
+    searchLabel: {
+        ru: "Поиск",
+        en: "Search"
+    },
+    searchButton: {
+        ru: "Найти",
+        en: "Search"
+    },
+    eventNameInputLabel: {
+        ru: "Название мероприятия",
+        en: "Event name"
+    },
+    eventDateInputLabel: {
+        ru: "Дата проведения мероприятия",
+        en: "Event date"
+    },
     oopsTitle: {
         ru: "Упс...",
         en: "Oops..."
