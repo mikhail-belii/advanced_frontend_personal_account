@@ -11,32 +11,32 @@
 }
 
 .certificates-header-name {
-    font-size: 40px;
+    font-size: var(--font-size-xxxxl);
     font-family: Raleway-Medium;
-    color: #3A3A3A;
+    color: var(--color-grey);
 }
 
 .certificates-page-path {
     display: flex;
     flex-direction: row;
     font-family: Roboto-Regular;
-    font-size: 14px;
+    font-size: var(--font-size-sm);
 }
 
 .certificates-page-path-main {
-    color: #3A3A3A;
+    color: var(--color-grey);
     cursor: pointer;
 }
 
 .certificates-page-path-certificate-order {
-    color: #375FFF;
+    color: var(--primary-color);
     cursor: default;
 }
 
 .certificates-subheader-name {
-    font-size: 32px;
+    font-size: var(--font-size-xxxl);
     font-family: Raleway-Medium;
-    color: #3A3A3A;
+    color: var(--color-grey);
 }
 
 .certificates-user-role-navigation {
@@ -45,14 +45,14 @@
 
 .certificates-user-role-navigation-item {
     padding: 8px 12px;
-    font-size: 16px;
+    font-size: var(--font-size-md);
     font-family: Raleway-Medium;
     align-items: center;
     border-bottom: 1px solid #D9D9D9;
     cursor: pointer;
     &.active {
-        border-left: 2px solid #375FFF;
-        color: #375FFF;
+        border-left: 2px solid var(--primary-color);;
+        color: var(--primary-color);
     }
 }
 
@@ -85,25 +85,25 @@
 
     &.active {
         span {
-            color: #375FFF;
+            color: var(--primary-color);
         }
-        border-bottom: 2px solid #375FFF;
+        border-bottom: 2px solid var(--primary-color);
     }
 }
 
 .certificates-education-entry-navigation-item-faculty,
     .certificates-employee-post-navigation-item-postName {
-    font-size: 20px;
+    font-size: var(--font-size-xl);
     font-family: Raleway-Medium;
-    color: #666666;
+    color: var(--color-lgrey);
 }
 
 .certificates-education-entry-navigation-item-education-level,
     .certificates-education-entry-navigation-item-status,
         .certificates-employee-post-navigation-item-employmentType {
-        font-size: 16px;
+            font-size: var(--font-size-md);
         font-family: Raleway-Medium;
-        color: #666666;
+        color: var(--color-lgrey);
 }
 
 .certificates-education-entry-info,
@@ -125,9 +125,9 @@
 }
 
 .certificates-order-container-title {
-    font-size: 20px;
+    font-size: var(--font-size-xl);
     font-family: Raleway-Medium;
-    color: #3A3A3A;
+    color: var(--color-grey);
 }
 
 .certificates-order-container-interactive {

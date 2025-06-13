@@ -15,10 +15,10 @@
 }
 
 .certificate-unit-content-label {
-    font-size: 16px;
+    font-size: var(--font-size-md);
     font-family: Raleway-Medium;
     font-variant-numeric: lining-nums;
-    color: #3A3A3A;
+    color: var(--color-grey);
     align-content: center;
 }
 
@@ -30,10 +30,10 @@
 
 .certificate-unit-content-info-certificate-type, .certificate-unit-content-info-date,
     .certificate-unit-content-info-receive-type {
-        font-size: 14px;
+        font-size: var(--font-size-sm);
         font-family: Raleway-Medium;
         font-variant-numeric: lining-nums;
-        color: #666666;
+        color: var(--color-lgrey);
 }
 
 .certificate-unit-buttons-and-status {

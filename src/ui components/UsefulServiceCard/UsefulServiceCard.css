@@ -12,8 +12,8 @@
     display: flex;
     align-items: center;
     font-family: Raleway-SemiBold;
-    font-size: 16px;
-    color: #3A3A3A;
+    font-size: var(--font-size-md);
+    color: var(--color-grey);
 }
 
 .useful-service-card-redirect {
@@ -40,8 +40,8 @@
     grid-column: 2 / 6;
     grid-row: 2 / 3;
     font-family: Raleway-Medium;
-    font-size: 16px;
-    color: #3A3A3A;
+    font-size: var(--font-size-md);
+    color: var(--color-grey);
     font-variant-numeric: lining-nums;
 }
 
@@ -55,14 +55,14 @@
 
 .useful-service-card-terms-of-distribution-title {
     font-family: Raleway-Medium;
-    font-size: 14px;
-    color: #666666;
+    font-size: var(--font-size-sm);
+    color: var(--color-lgrey);
     font-variant-numeric: lining-nums;
 }
 
 .useful-service-card-terms-of-distribution-text {
     font-family: Raleway-Medium;
-    font-size: 16px;
-    color: #3A3A3A;
+    font-size: var(--font-size-md);
+    color: var(--color-grey);
     font-variant-numeric: lining-nums;
 }

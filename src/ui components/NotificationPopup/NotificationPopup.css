@@ -81,8 +81,7 @@
 }
 
 .popup-text {
-    font-size: 14px;
-    font-weight: 400;
+    font-size: var(--font-size-sm);
     font-family: Roboto-Regular;
 }
 
@@ -91,14 +90,12 @@
     justify-content: center;
     background-color: rgba(249, 249, 249, 0.4);
     padding: 12px 24px;
-    font-size: 14px;
-    font-weight: 400;
+    font-size: var(--font-size-sm);
     font-family: Roboto-Regular;
 }
 
 .popup-inner-text {
-    font-size: 14px;
-    font-weight: 400;
+    font-size: var(--font-size-sm);
     font-family: Roboto-Regular;
     color: #393939;
 }

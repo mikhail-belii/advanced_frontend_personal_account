@@ -20,7 +20,7 @@
 
     &:active {
         .basic-select-label {
-            font-size: 12px;
+            font-size: var(--font-size-xs);
             font-family: Roboto-Regular;
             transition: all 0.2s ease;
         }
@@ -31,7 +31,7 @@
     position: absolute;
     margin-left: 10px;
     margin-top: -8px;
-    font-size: 14px;
+    font-size: var(--font-size-sm);
     font-family: Raleway-Medium;
     color: #9D9D9D;
     background-color: #fff;
@@ -56,8 +56,8 @@
     flex: 1;
     border: none;
     outline: none;
-    color: #666666;
-    font-size: 16px;
+    color: var(--color-lgrey);
+    font-size: var(--font-size-md);
     font-family: Roboto-Regular;
     width: max-content;
     min-width: 100px;

@@ -29,5 +29,5 @@
     transform: translateX(calc(100% + 3px));
   }
   .toggle-button:checked {
-    background-color: #375FFF;
+    background-color: var(--primary-color);
   }

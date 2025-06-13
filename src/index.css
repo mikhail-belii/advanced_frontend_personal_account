@@ -1,0 +1,14 @@
+:root {
+    --primary-color: #375FFF;
+    --color-grey: #3A3A3A;
+    --color-lgrey: #666666;
+    
+    --font-size-xs: 12px;
+    --font-size-sm: 14px;
+    --font-size-md: 16px;
+    --font-size-lg: 18px;
+    --font-size-xl: 20px;
+    --font-size-xxl: 26px;
+    --font-size-xxxl: 32px;
+    --font-size-xxxxl: 40px;
+}

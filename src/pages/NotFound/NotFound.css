@@ -5,9 +5,8 @@
 .status-code {
     position: relative;
     font-size: 380px;
-    font-weight: 400;
     font-family: Roboto-Regular;
-    color: #375FFF;
+    color: var(--primary-color);
     left: 50px;
     line-height: 1;
 }
@@ -29,10 +28,9 @@
 }
 
 .status-message {
-    font-size: 40px;
-    font-weight: 500;
+    font-size: var(--font-size-xxxxl);
     font-family: Raleway-Regular;
-    color: #3A3A3A;
+    color: var(--color-grey);
     line-height: 1;
 }
 
@@ -53,17 +51,15 @@
 }
 
 .what-happened {
-    font-size: 20px;
-    font-weight: 500;
+    font-size: var(--font-size-xl);
     font-family: Raleway-Regular;
-    color: #3A3A3A;
+    color: var(--color-grey);
 }
 
 .description {
-    font-size: 16px;
-    font-weight: 500;
+    font-size: var(--font-size-md);
     font-family: Raleway-Regular;
-    color: #3A3A3A;
+    color: var(--color-grey);
 }
 
 .error-line-1 {

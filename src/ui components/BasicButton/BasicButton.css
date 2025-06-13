@@ -2,10 +2,10 @@
     width: inherit;
     border: none;
     border-radius: 8px;
-    background-color: #375FFF;
+    background-color: var(--primary-color);
     cursor: pointer;
     color: white;
-    font-size: 16px;
+    font-size: var(--font-size-md);
     font-family: Roboto-Regular;
     padding: 15px 25px;
     text-transform: uppercase;

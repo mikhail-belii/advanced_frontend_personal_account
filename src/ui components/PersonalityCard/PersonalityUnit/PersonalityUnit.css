@@ -5,15 +5,15 @@
 }
 
 .personality-unit-label {
-    font-size: 14px;
+    font-size: var(--font-size-sm);
     font-family: Raleway-Medium;
-    color: #666666;
+    color: var(--color-lgrey);
     font-variant-numeric: lining-nums;
 }
 
 .personality-unit-text {
-    font-size: 16px;
+    font-size: var(--font-size-md);
     font-family: Raleway-Medium;
-    color: #3A3A3A;
+    color: var(--color-grey);
     font-variant-numeric: lining-nums;
 }

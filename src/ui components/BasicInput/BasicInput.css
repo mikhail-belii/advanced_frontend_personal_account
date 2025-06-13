@@ -23,7 +23,7 @@
 
     &:active {
         .basic-input-label {
-            font-size: 12px;
+            font-size: var(--font-size-xs);
             font-family: Roboto-Regular;
             transition: all 0.2s ease;
         }
@@ -34,7 +34,7 @@
     position: absolute;
     margin-left: 10px;
     margin-top: -8px;
-    font-size: 14px;
+    font-size: var(--font-size-sm);
     font-family: Raleway-Medium;
     color: #9D9D9D;
     background-color: #fff;
@@ -70,9 +70,8 @@
     flex: 1;
     border: none;
     outline: none;
-    color: #3A3A3A;
-    font-size: 16px;
-    font-weight: 500;
+    color: var(--color-grey);
+    font-size: var(--font-size-md);
     font-family: inherit;
     background: transparent;
     padding: 4px 0;
@@ -103,8 +102,7 @@
 }
 
 .basic-input-supporting-text {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: var(--font-size-sm);
     color: rgb(58, 58, 58);
     margin-left: 14px;
 }

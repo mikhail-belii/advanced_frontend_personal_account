@@ -24,9 +24,9 @@
 }
 
 .personality-card-personal-data-header {
-    font-size: 20px;
+    font-size: var(--font-size-xl);
     font-family: Raleway-Medium;
-    color: #3A3A3A;
+    color: var(--color-grey);
 }
 
 .personality-card-contacts {
@@ -37,9 +37,9 @@
 }
 
 .personality-card-contacts-header {
-    font-size: 20px;
+    font-size: var(--font-size-xl);
     font-family: Raleway-Medium;
-    color: #3A3A3A;
+    color: var(--color-grey);
 }
 
 .divider {

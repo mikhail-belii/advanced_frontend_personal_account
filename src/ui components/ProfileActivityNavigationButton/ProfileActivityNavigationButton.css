@@ -1,13 +1,13 @@
 .profile-activity-nagivation-button {
-    font-size: 20px;
+    font-size: var(--font-size-xl);
     font-family: Raleway-Medium;
-    color: #666666;
+    color: var(--color-lgrey);
     padding: 20px 8px;
     cursor: pointer;
     width: fit-content;
 }
 
 .profile-activity-nagivation-button.active {
-    color: #375FFF;
-    border-bottom: 2px solid #375FFF;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
 }

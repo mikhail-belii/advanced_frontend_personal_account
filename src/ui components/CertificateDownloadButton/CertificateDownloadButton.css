@@ -11,7 +11,7 @@
     user-select: none;
 
     &.certificate {
-        background-color: #375fff;
+        background-color: var(--primary-color);
 
         span {
             color: #fff;
@@ -27,10 +27,10 @@
 
     &.signature {
         background-color: #fff;
-        border: 1px solid #375fff;
+        border: 1px solid var(--primary-color);
 
         span {
-            color: #375fff;
+            color: var(--primary-color);
         }
 
         &:hover {
@@ -42,7 +42,7 @@
     }
 
     span {
-        font-size: 14px;
+        font-size: var(--font-size-sm);
         font-family: Roboto-Regular;
     }
 }

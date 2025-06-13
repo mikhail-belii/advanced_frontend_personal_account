@@ -11,25 +11,25 @@
 }
 
 .useful-services-header-name {
-    font-size: 40px;
+    font-size: var(--font-size-xxxxl);
     font-family: Raleway-Medium;
-    color: #3A3A3A;
+    color: var(--color-grey);
 }
 
 .useful-services-page-path {
     display: flex;
     flex-direction: row;
-    font-size: 14px;
+    font-size: var(--font-size-sm);
     font-family: Roboto-Regular;
 }
 
 .useful-services-page-path-main {
-    color: #3A3A3A;
+    color: var(--color-grey);
     cursor: pointer;
 }
 
 .useful-services-page-path-useful-services {
-    color: #375FFF;
+    color: var(--primary-color);
     cursor: default;
 }
 
@@ -57,7 +57,7 @@
     background: none;
     border: none;
 
-    font-size: 18px;
+    font-size: var(--font-size-lg);
     user-select: none;
 }
 
@@ -85,6 +85,6 @@
 
 .pagination-dots {
     padding: 0 8px;
-    font-size: 18px;
+    font-size: var(--font-size-lg);
     user-select: none;
 }
