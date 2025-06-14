@@ -11,6 +11,7 @@ import CertificatesPage from './pages/CertificatesPage/CertificatesPage'
 import ProtectedRoute from './api/models/ProtectedRoute'
 import UsefulServicesPage from './pages/UsefulServicesPage/UsefulServicesPage'
 import EventsPage from './pages/EventsPage/EventsPage'
+import ConcreteEventPage from './pages/ConcreteEventPage/ConcreteEventPage'
 
 const TitleUpdater = () => {
   const location = useLocation()
@@ -18,7 +19,15 @@ const TitleUpdater = () => {
 
   useEffect(() => {
     const route: string = location.pathname
-    const title: string = translate(PAGE_TITLES[route]) || translate("oopsTitle")
+    let title: string
+    
+    if (route.startsWith('/event/')) {
+      title = translate(PAGE_TITLES['/event/:id']) || translate("oopsTitle")
+    } 
+    else {
+      title = translate(PAGE_TITLES[route]) || translate("oopsTitle")
+    }
+    
     document.title = title
   }, [location.pathname, language])
 
@@ -34,6 +43,7 @@ const AppContent = () => {
       <Routes>
         <Route path='/' element={<EventsPage />}/>
         <Route path="/events" element={<EventsPage />} />
+        <Route path="/event/:id" element={<ConcreteEventPage />} />
         <Route path='/login' element={<LoginPage/>}/>
         <Route path="/profile" element={
           <ProtectedRoute requiredRoles={['Default', 'Admin']}>

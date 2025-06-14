@@ -451,6 +451,42 @@ export const TRANSLATIONS: ITranslations = {
         ru: "Дата проведения мероприятия",
         en: "Event date"
     },
+    fetchEventsError: {
+        ru: "Произошла ошибка при загрузке мероприятий",
+        en: "There was an error loading events"
+    },
+    fetchEventError: {
+        ru: "Произошла ошибка при загрузке мероприятия",
+        en: "There was an error loading the event"
+    },
+    willParticipate: {
+        ru: "Буду участвовать",
+        en: "Will participate"
+    },
+    alreadyParticipate: {
+        ru: "Участвую",
+        en: "Participating"
+    },
+    participateEventError: {
+        ru: "Произошла ошибка при регистрации на участие",
+        en: "There was an error while registering for participation"
+    },
+    description: {
+        ru: "Описание",
+        en: "Description"
+    },
+    eventRegistrationLastDate: {
+        ru: "Дата окончания регистрации",
+        en: "Registration last date"
+    },
+    eventLink: {
+        ru: "Ссылка",
+        en: "Link"
+    },
+    empty: {
+        ru: "",
+        en: ""
+    },
     oopsTitle: {
         ru: "Упс...",
         en: "Oops..."
@@ -458,6 +494,10 @@ export const TRANSLATIONS: ITranslations = {
     eventsTitle: {
         ru: "Мероприятия",
         en: "Events"
+    },
+    eventTitle: {
+        ru: "Мероприятие",
+        en: "Event"
     },
     loginTitle: {
         ru: "Вход",

@@ -3,6 +3,7 @@
     flex-direction: row;
     gap: 20px;
     padding: 12px 24px;
+    cursor: pointer;
 }
 
 .event-short-card-picture {
@@ -40,7 +41,7 @@
     border-radius: 8px;
     width: fit-content;
     font-size: var(--font-size-md);
-    font-family: Raleway-Semibold;
+    font-family: Raleway-SemiBold;
 }
 
 .event-short-card-content-info-unit {

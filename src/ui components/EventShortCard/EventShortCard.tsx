@@ -2,6 +2,7 @@ import { EventFormat, EventStatus } from "../../pages/EventsPage/EventsPage"
 import BlankImage from "../../assets/images/Image_Blank.jpg"
 import { useLanguage } from "../../context/LanguageContext"
 import formatDateTime from "../../utils/formatDateTime"
+import { useNavigate } from "react-router-dom"
 import "./EventShortCard.css"
 
 
@@ -17,6 +18,7 @@ export type EventShortCardProps = {
 
 const EventShortCard = ({id, title, picture, dateTimeFrom, dateTimeTo, format, status}: EventShortCardProps) => {
     const {translate} = useLanguage()
+    const navigate = useNavigate()
 
     const getEventDate = () => {
         if (dateTimeFrom === null && dateTimeTo === null) {
@@ -38,7 +40,7 @@ const EventShortCard = ({id, title, picture, dateTimeFrom, dateTimeTo, format, s
     }
 
     const handleClick = () => {
-
+        navigate(`/event/${id}`)
     }
 
     return (

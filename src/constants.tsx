@@ -3,6 +3,7 @@ import { NotFoundProps } from "./pages/NotFound/NotFound"
 export const PAGE_TITLES: Record<string, string> = {
     '/': "eventsTitle",
     '/events': "eventsTitle",
+    '/event/:id': "eventTitle",
     '/login': "loginTitle",
     '/profile': "profileTitle",
     '/certificates': "certificatesTitle",
