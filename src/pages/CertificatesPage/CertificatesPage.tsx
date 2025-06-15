@@ -17,6 +17,7 @@ import { IEducationEntry } from "../../ui components/EducationCard/EducationCard
 import { NotificationPopup } from "../../ui components/NotificationPopup/NotificationPopup"
 import { AxiosError } from "axios"
 import { IEmployeePost } from "../../ui components/EmployeeCard/EmployeeCard"
+import { useNavigate } from "react-router-dom"
 
 export type DepartmentDto = {
     id: string,
@@ -71,6 +72,7 @@ export interface ICertificate {
 const CertificatesPage = () => {
     const {translate} = useLanguage()
     const {isAuthorized} = useAuthorization()
+    const navigate = useNavigate()
     const [activeSection, setActiveSection] = useState<UserRoleEnum | null>(null)
     const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 901)
     const [isHamburger, setIsHamburger] = useState(window.innerWidth < 1201)
@@ -273,7 +275,7 @@ const CertificatesPage = () => {
                 </div>
                 {isHamburger && <div className="certificates-header-name">{translate("certificatesTitle")}</div>}
                 <div className="certificates-page-path">
-                    <p className="certificates-page-path-main">{`${translate("main")} /`}</p>
+                    <p className="certificates-page-path-main" onClick={() => navigate("/")}>{`${translate("main")} /`}</p>
                     <p className="certificates-page-path-certificate-order">{translate("certificateOrder")}</p>
                 </div>
                 <div className="certificates-subheader-name">{translate("certificateOrder")}</div>

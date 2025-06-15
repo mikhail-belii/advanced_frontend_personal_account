@@ -26,11 +26,9 @@
 
 .basic-white-button {
     width: inherit;
-    border: 2px solid #204CFF;
     border-radius: 8px;
     background-color: white;
     cursor: pointer;
-    color: #204CFF;
     font-size: var(--font-size-md);
     font-family: Raleway-Regular;
     padding: 15px 25px;
@@ -38,5 +36,15 @@
 
     &:disabled {
         cursor: not-allowed;
+    }
+
+    &.blue {
+        border: 2px solid #204CFF;
+        color: #204CFF;
+    }
+
+    &.grey {
+        border: 2px solid var(--color-grey);
+        color: var(--color-grey);
     }
 }

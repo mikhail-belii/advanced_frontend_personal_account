@@ -5,7 +5,7 @@ import { FileDto } from "../../ui components/PersonalityCard/PersonalityCard"
 import Sidebar from "../../ui components/Sidebar/Sidebar"
 import UsefulServiceCard from "../../ui components/UsefulServiceCard/UsefulServiceCard"
 import LanguageSwitch from "../../ui components/LanguageSwitch/LanguageSwitch"
-import { useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import "./UsefulServicesPage.css"
 import api from "../../api/api"
 import { API_URL, USEFUL_SERVICES_PAGE_PAGESIZE } from "../../constants"
@@ -47,6 +47,7 @@ export interface IUsefulServiceDtoPagedListWithMetaData {
 const UsefulServicesPage = () => {
     const {translate} = useLanguage()
     const {isAuthorized} = useAuthorization()
+    const navigate = useNavigate()
     const [isHamburger, setIsHamburger] = useState(window.innerWidth < 1201)
     const [searchParams, setSearchParams] = useSearchParams();
     let initialPageSize = Number(searchParams.get("pageSize")) || USEFUL_SERVICES_PAGE_PAGESIZE
@@ -229,7 +230,7 @@ const UsefulServicesPage = () => {
                 </div>
                 {isHamburger && <div className="useful-services-header-name">{translate("usefulServicesTitle")}</div>}
                 <div className="useful-services-page-path">
-                    <p className="useful-services-page-path-main">{`${translate("main")} /`}</p>
+                    <p className="useful-services-page-path-main" onClick={() => navigate("/")}>{`${translate("main")} /`}</p>
                     <p className="useful-services-page-path-useful-services">{translate("usefulServicesTitle")}</p>
                 </div>
 

@@ -16,6 +16,8 @@ import ArrowUp from "../../assets/icons/Arrow-up.svg"
 import PersonalityUnit from "../../ui components/PersonalityCard/PersonalityUnit/PersonalityUnit"
 import formatDateTime from "../../utils/formatDateTime"
 import Map from "../../ui components/Map/Map"
+import { NotificationPopup } from "../../ui components/NotificationPopup/NotificationPopup"
+import RegistrationModal, { RegistrationData } from "../../ui components/RegistrationModal/RegistrationModal"
 
 export type EventDto = {
     id: string,
@@ -45,11 +47,14 @@ const ConcreteEventPage = () => {
     const navigate = useNavigate()
     const [isHamburger, setIsHamburger] = useState(window.innerWidth < 1201)
     const [error, setError] = useState<string | null>(null)
+    const [success, setSuccess] = useState<string | null>(null)
+    const [warning, setWarning] = useState<string | null>(null)
     const {showNotification, setShowNotification, handleClose} = useNotification(false)
     const [event, setEvent] = useState<EventDto | null>(null)
     const [eventImage, setEventImage] = useState<string | null>(null)
     const [isParticipant, setIsParticipant] = useState<boolean | null>(null)
     const [isDescriptionOpen, setIsDescriptionOpen] = useState(true)
+    const [isRegistrationModalOpen, setIsRegistrationModalOpen] = useState(false)
 
     useEffect(() => {
         const handleResize = () => {
@@ -123,7 +128,19 @@ const ConcreteEventPage = () => {
 
     const handleParticipateInner = async () => {
         try {
-
+            setError(null)
+            const response = await api.post(`${API_URL}/events/register/inner`, {
+                "eventId": id
+            })
+            
+            if (response.status === 200) {
+                setSuccess(translate("successEventRegister"))
+                await fetchParticipating()
+            }
+            else {
+                setError(translate("eventRegisterFailed"))
+            }
+            setShowNotification(true)
         }
         catch (e) {
             console.error(e)
@@ -133,8 +150,51 @@ const ConcreteEventPage = () => {
     }
 
     const handleParticipateExternal = async () => {
-        try {
+        setIsRegistrationModalOpen(true)
+    }
 
+    const handleRegistrationSubmit = async (data: RegistrationData) => {
+        if (!data.name.trim()) {
+            setWarning(translate("emptyNameWarning"))
+            setShowNotification(true)
+            return
+        }
+
+        if (!data.phone.trim()) {
+            setWarning(translate("emptyPhoneWarning"))
+            setShowNotification(true)
+            return
+        }
+
+        if (!data.email.trim()) {
+            setWarning(translate("emptyEmailWarning"))
+            setShowNotification(true)
+            return
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!emailRegex.test(data.email)) {
+            setWarning(translate("invalidEmailWarning"))
+            setShowNotification(true)
+            return
+        }
+
+        try {
+            setError(null)
+            setWarning(null)
+            const response = await api.post(`${API_URL}/events/register/external`, {
+                eventId: id,
+                ...data
+            })
+            
+            if (response.status === 200) {
+                setSuccess(translate("successEventRegister"))
+                setIsRegistrationModalOpen(false)
+            }
+            else {
+                setError(translate("eventRegisterFailed"))
+            }
+            setShowNotification(true)
         }
         catch (e) {
             console.error(e)
@@ -176,7 +236,7 @@ const ConcreteEventPage = () => {
                 </div>
                 {isHamburger && <div className="useful-services-header-name">{translate("eventsTitle")}</div>}
                 <div className="event-page-path">
-                    <p className="event-page-path-main">{`${translate("main")} /`}</p>
+                    <p className="event-page-path-main" onClick={() => navigate("/")}>{`${translate("main")} /`}</p>
                     <p className="event-page-path-event-title">{event?.title}</p>
                 </div>
 
@@ -200,7 +260,8 @@ const ConcreteEventPage = () => {
                                         <BasicButton
                                             innerText={translate("alreadyParticipate")}
                                             isDisabled={true}
-                                            isWhite={true}/>}
+                                            isWhite={true}
+                                            color="blue"/>}
                                 </div>
 
                                 <div className="event-content-body">
@@ -281,6 +342,20 @@ const ConcreteEventPage = () => {
                     }
                 </div>
             </div>
+            <RegistrationModal
+                isOpen={isRegistrationModalOpen}
+                onClose={() => setIsRegistrationModalOpen(false)}
+                onSubmit={handleRegistrationSubmit}
+            />
+            {showNotification && success && (
+                <NotificationPopup type="success" innerText={success} onClose={handleClose}/>
+            )}
+            {showNotification && error && (
+                <NotificationPopup type="error" innerText={error} onClose={handleClose}/>
+            )}
+            {showNotification && warning && (
+                <NotificationPopup type="warning" innerText={warning} onClose={handleClose}/>
+            )}
         </div>
     )
 }

@@ -483,6 +483,54 @@ export const TRANSLATIONS: ITranslations = {
         ru: "Ссылка",
         en: "Link"
     },
+    successEventRegister: {
+        ru: "Вы успешно зарегистрировались на мероприятие",
+        en: "You have successfully registered for the event"
+    },
+    eventRegisterFailed: {
+        ru: "Не удалось зарегистрироваться на мероприятие",
+        en: "Failed to register for the event"
+    },
+    fullName: {
+        ru: "ФИО",
+        en: "Full Name"
+    },
+    phoneNumber: {
+        ru: "Телефон",
+        en: "Phone Number"
+    },
+    additionalInfo: {
+        ru: "Дополнительная информация",
+        en: "Additional Info"
+    },
+    saveModal: {
+        ru: "Сохранить",
+        en: "Save"
+    },
+    cancelModal: {
+        ru: "Отменить",
+        en: "Cancel"
+    },
+    eventRegistration: {
+        ru: "Регистрация на мероприятие",
+        en: "Event registration"
+    },
+    emptyNameWarning: {
+        ru: "Введите ФИО",
+        en: "Type your full name"
+    },
+    emptyPhoneWarning: {
+        ru: "Введите номер телефона",
+        en: "Type your phone number"
+    },
+    emptyEmailWarning: {
+        ru: "Введите электронную почту",
+        en: "Type your email"
+    },
+    invalidEmailWarning: {
+        ru: "Введите корректную эл. почту",
+        en: "Type the correct email"
+    },
     empty: {
         ru: "",
         en: ""
