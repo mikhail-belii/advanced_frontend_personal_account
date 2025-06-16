@@ -121,3 +121,21 @@
     border-radius: 8px;
     overflow: hidden;
 }
+
+@media (max-width: 900px) {
+    .event-content-header {
+        flex-direction: column;
+        align-items: normal;
+        button {
+            width: fit-content;
+        }
+        gap: 32px;
+    }
+}
+
+@media (max-width: 600px) {
+    .event-content-body-down-row:has(.event-content-body-down-img) {
+        display: flex;
+        flex-direction: column;
+    }
+}
