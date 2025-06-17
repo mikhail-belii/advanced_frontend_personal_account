@@ -1,0 +1,50 @@
+.admin-users-page {
+    display: flex;
+}
+
+.admin-users-page-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px 25px 0px;
+}
+
+.admin-users-header-name {
+    font-size: var(--font-size-xxxxl);
+    font-family: Raleway-Medium;
+    color: var(--color-grey);
+}
+
+.admin-users-page-path {
+    display: flex;
+    flex-direction: row;
+    font-family: Roboto-Regular;
+    font-size: var(--font-size-sm);
+}
+
+.admin-users-page-path-main, .admin-users-page-path-admin{
+    color: var(--color-grey);
+    cursor: pointer;
+}
+
+.admin-users-page-path-admin-users {
+    color: #861F41;
+    cursor: default;
+}
+
+.admin-users-page-content {
+
+}
+
+@media (max-width: 1200px) {
+
+}
+
+@media (max-width: 900px) {
+
+}
+
+@media (max-width: 600px) {
+
+}

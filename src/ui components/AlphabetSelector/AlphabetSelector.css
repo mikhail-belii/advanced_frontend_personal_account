@@ -1,0 +1,53 @@
+.alphabet-selector {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-family: Roboto-Regular;
+    font-size: 24px;
+}
+
+.alphabet-selector:hover {
+    border-color: var(--primary-color);
+}
+
+.alphabet-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.alphabet-collapsed {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}
+
+.alphabet-full {
+    display: flex;
+    flex-direction: row;
+    gap: 17px;
+    justify-content: center;
+}
+
+.letter {
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--color-grey);
+}
+
+.letter:hover {
+    background-color: var(--color-light-grey);
+}
+
+.letter.active {
+    color: #861F41;
+}
+
+.arrow {
+    cursor: pointer;
+}
