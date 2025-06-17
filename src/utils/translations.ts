@@ -531,6 +531,30 @@ export const TRANSLATIONS: ITranslations = {
         ru: "Введите корректную эл. почту",
         en: "Type the correct email"
     },
+    adminLandingCardUsersTitle: {
+        ru: "Пользователи",
+        en: "Users"
+    },
+    adminLandingCardUsersDescription: {
+        ru: "Страница предназначена для просмотра и фильтрации всех пользователей системы",
+        en: "The page is designed to view and filter all users of the system"
+    },
+    adminLandingCardUSTitle: {
+        ru: "Полезные сервисы",
+        en: "Useful services"
+    },
+    adminLandingCardUSDescription: {
+        ru: "Страница предназначена для просмотра, добавления, изменения и удаления полезных сервисов системы",
+        en: "The page is designed to view, add, change and delete useful services in the system"
+    },
+    adminLandingCardEventsTitle: {
+        ru: "Мероприятия",
+        en: "Events"
+    },
+    adminLandingCardEventsDescription: {
+        ru: "Страница предназначена для просмотра, добавления, изменения и удаления мероприятий в системе",
+        en: "The page is designed to view, add, change and delete events in the system"
+    },
     empty: {
         ru: "",
         en: ""
@@ -562,5 +586,21 @@ export const TRANSLATIONS: ITranslations = {
     usefulServicesTitle: {
         ru: "Полезные сервисы",
         en: "Useful services"
-    }
+    },
+    adminLandingTitle: {
+        ru: "Администрирование",
+        en: "Administration"
+    },
+    adminUsersTitle: {
+        ru: "Пользователи",
+        en: "Users"
+    },
+    adminUSTitle: {
+        ru: "Полезные сервисы",
+        en: "Useful Services"
+    },
+    adminEventsTitle: {
+        ru: "Мероприятия",
+        en: "Events"
+    },
 }

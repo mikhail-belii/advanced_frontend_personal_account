@@ -7,7 +7,11 @@ export const PAGE_TITLES: Record<string, string> = {
     '/login': "loginTitle",
     '/profile': "profileTitle",
     '/certificates': "certificatesTitle",
-    '/usefulservices': "usefulServicesTitle"
+    '/usefulservices': "usefulServicesTitle",
+    '/admin': "adminLandingTitle",
+    '/admin/users': "adminUsersTitle",
+    '/admin/usefulservices': "adminUSTitle",
+    '/admin/events': "adminEventsTitle"
 }
 
 export const BASE_ERROR_PAGE: NotFoundProps = {

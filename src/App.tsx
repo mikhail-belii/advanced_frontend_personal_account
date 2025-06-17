@@ -12,6 +12,7 @@ import ProtectedRoute from './api/models/ProtectedRoute'
 import UsefulServicesPage from './pages/UsefulServicesPage/UsefulServicesPage'
 import EventsPage from './pages/EventsPage/EventsPage'
 import ConcreteEventPage from './pages/ConcreteEventPage/ConcreteEventPage'
+import AdminLandingPage from './pages/AdminLandingPage/AdminLandingPage'
 
 const TitleUpdater = () => {
   const location = useLocation()
@@ -34,8 +35,6 @@ const TitleUpdater = () => {
   return null
 }
 
-const AdminPage = () => <h1>Admin Page</h1>;
-
 const AppContent = () => {
   return (
     <>
@@ -52,7 +51,7 @@ const AppContent = () => {
         } />
         <Route path="/admin" element={
           <ProtectedRoute requiredRoles={['Admin']}>
-            <AdminPage />
+            <AdminLandingPage />
           </ProtectedRoute>
         } />
         <Route path="/certificates" element={

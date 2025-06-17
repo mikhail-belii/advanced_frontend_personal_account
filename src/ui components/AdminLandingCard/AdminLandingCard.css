@@ -1,0 +1,30 @@
+.admin-landing-card {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    gap: 16px;
+    cursor: pointer;
+}
+
+.admin-landing-card-header {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+
+    img {
+        width: 27px;
+    }
+
+    span {
+        font-family: Raleway-Medium;
+        font-size: var(--font-size-xl);
+        color: var(--color-grey);
+    }
+}
+
+.admin-landing-card-body {
+    font-family: Raleway-Medium;
+    font-size: var(--font-size-md);
+    color: var(--color-grey);
+}

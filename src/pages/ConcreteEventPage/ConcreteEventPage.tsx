@@ -108,7 +108,7 @@ const ConcreteEventPage = () => {
     }
 
     const fetchEventImage = async () => {
-        if (event) {
+        if (event && event.picture) {
             try {
                 const response = await api.get(`${API_URL}/files/${event.picture.id}`, { 
                     responseType: 'blob' })
