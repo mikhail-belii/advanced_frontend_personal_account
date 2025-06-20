@@ -10,6 +10,7 @@ export const PAGE_TITLES: Record<string, string> = {
     '/usefulservices': "usefulServicesTitle",
     '/admin': "adminLandingTitle",
     '/admin/users': "adminUsersTitle",
+    '/admin/user/:id': "adminUserTitle",
     '/admin/usefulservices': "adminUSTitle",
     '/admin/events': "adminEventsTitle"
 }

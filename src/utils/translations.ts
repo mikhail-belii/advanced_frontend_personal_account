@@ -567,6 +567,10 @@ export const TRANSLATIONS: ITranslations = {
         ru: "Пользователей не найдено",
         en: "No users found"
     },
+    individualData: {
+        ru: "Данные физического лица",
+        en: "Individual data"
+    },
     empty: {
         ru: "",
         en: ""
@@ -606,6 +610,10 @@ export const TRANSLATIONS: ITranslations = {
     adminUsersTitle: {
         ru: "Пользователи",
         en: "Users"
+    },
+    adminUserTitle: {
+        ru: "Пользователь",
+        en: "User"
     },
     adminUSTitle: {
         ru: "Полезные сервисы",

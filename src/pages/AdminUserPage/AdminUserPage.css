@@ -1,0 +1,88 @@
+.admin-user-page {
+    display: flex;
+}
+
+.admin-user-page-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px 25px 0px;
+}
+
+.admin-user-header-name {
+    font-size: var(--font-size-xxxxl);
+    font-family: Raleway-Medium;
+    color: var(--color-grey);
+}
+
+.admin-user-page-path {
+    display: flex;
+    flex-direction: row;
+    font-family: Roboto-Regular;
+    font-size: var(--font-size-sm);
+}
+
+.admin-user-page-path-main, .admin-user-page-path-admin, .admin-user-page-path-admin-users{
+    color: var(--color-grey);
+    cursor: pointer;
+}
+
+.admin-user-page-path-admin-user {
+    color: var(--primary-color);
+    cursor: default;
+}
+
+.admin-user-page-content {
+    margin: 20px 30px 0 0;
+}
+
+.admin-user-page-content-container-image {
+    max-width: 320px;
+    border-radius: 4px;
+    height: 100%;
+    max-height: 320px;
+}
+
+.admin-user-page-content-userName {
+    font-family: Raleway-Medium;
+    font-size: var(--font-size-xxxl);
+    color: var(--color-grey);
+}
+
+.admin-user-page-content-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 24px;
+}
+
+.admin-user-page-content-container-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    gap: 20px;
+    width: 100%;
+}
+
+.admin-user-page-content-container-info-data, .admin-user-page-content-container-info-contacts {
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+}
+
+.admin-user-page-content-container-info-data-title, .admin-user-page-content-container-info-contacts-title {
+    font-family: Raleway-Medium;
+    font-size: var(--font-size-xl);
+    margin-bottom: 16px;
+    color: var(--color-grey);
+}
+
+@media (max-width: 600px) {
+    .admin-user-page-content-container {
+        flex-direction: column;
+
+        img {
+            align-self: center;
+        }
+    }
+}

@@ -14,6 +14,7 @@ import EventsPage from './pages/EventsPage/EventsPage'
 import ConcreteEventPage from './pages/ConcreteEventPage/ConcreteEventPage'
 import AdminLandingPage from './pages/AdminLandingPage/AdminLandingPage'
 import AdminUsersPage from './pages/AdminUsersPage/AdminUsersPage'
+import AdminUserPage from './pages/AdminUserPage/AdminUserPage'
 
 const TitleUpdater = () => {
   const location = useLocation()
@@ -26,6 +27,10 @@ const TitleUpdater = () => {
     if (route.startsWith('/event/')) {
       title = translate(PAGE_TITLES['/event/:id']) || translate("oopsTitle")
     } 
+    else if (route.startsWith('/admin/user/'))
+    {
+      title = translate(PAGE_TITLES['/admin/user/:id']) || translate("oopsTitle")
+    }
     else {
       title = translate(PAGE_TITLES[route]) || translate("oopsTitle")
     }
@@ -58,6 +63,11 @@ const AppContent = () => {
         <Route path="/admin/users" element={
           <ProtectedRoute requiredRoles={['Admin']}>
             <AdminUsersPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/admin/user/:id" element={
+          <ProtectedRoute requiredRoles={['Admin']}>
+            <AdminUserPage />
           </ProtectedRoute>
         } />
         <Route path="/certificates" element={

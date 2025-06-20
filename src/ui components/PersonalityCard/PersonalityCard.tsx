@@ -60,7 +60,7 @@ const PersonalityCard = ({onImageClick, ...props}: IPersonalityCardProps) => {
             ? translate("genderFemale")
             : translate("genderNotDefined"),
         [translate("birthDate")]: formatDate(props.birthDate!, language) || props.birthDate,
-        [translate("citizenship")]: props.citizenship?.name || translate("notDefined"),
+        [translate("citizenship")]: props.citizenship?.name || translate("genderNotDefined"),
         [translate("email")]: props.email,
     }
 
