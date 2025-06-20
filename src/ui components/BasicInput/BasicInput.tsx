@@ -12,7 +12,7 @@ type InputProps = {
     value?: string,
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void,
     showSearchIcon?: boolean,
-    searchIcon?: React.ReactNode
+    searchIcon?: string
 }
 
 const BasicInput = ({label, supportingText, placeholder, type = "text", name, value, onChange, showSearchIcon = false, searchIcon}: InputProps) => {
@@ -38,9 +38,9 @@ const BasicInput = ({label, supportingText, placeholder, type = "text", name, va
         <div className="basic-input-container">
             <label className="basic-input-label">{label}</label>
             <div className="basic-input-wrapper">
-                {showSearchIcon && (
+                {(showSearchIcon && searchIcon) && (
                     <div className="basic-input-search-icon">
-                        {searchIcon}
+                        <img src={searchIcon} alt="search"/>
                     </div>
                 )}
 

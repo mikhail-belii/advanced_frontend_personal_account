@@ -25,6 +25,8 @@ export const API_URL = "https://lk-stud.api.kreosoft.space/api"
 
 export const USEFUL_SERVICES_PAGE_PAGESIZE = 2
 
+export const ADMIN_USERS_PAGE_PAGESIZE = 6
+
 export const EVENTS_PAGE_PAGESIZE = 4
 
 export const RUSSIAN_ALPHABET = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'

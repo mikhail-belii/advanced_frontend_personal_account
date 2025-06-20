@@ -555,6 +555,18 @@ export const TRANSLATIONS: ITranslations = {
         ru: "Страница предназначена для просмотра, добавления, изменения и удаления мероприятий в системе",
         en: "The page is designed to view, add, change and delete events in the system"
     },
+    typeFullName: {
+        ru: "Введите ФИО",
+        en: "Type full name"
+    },
+    fetchUsersError: {
+        ru: "Произошла ошибка при получении списка пользователей",
+        en: "An error occurred while retrieving the list of users"
+    },
+    noUsersFound: {
+        ru: "Пользователей не найдено",
+        en: "No users found"
+    },
     empty: {
         ru: "",
         en: ""

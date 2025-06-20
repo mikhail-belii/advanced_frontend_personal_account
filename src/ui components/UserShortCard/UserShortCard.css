@@ -1,0 +1,35 @@
+.user-short-card {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 24px;
+    gap: 4px;
+    cursor: pointer;
+
+    &:hover {
+        border-left: 2px solid var(--primary-color);
+    }
+}
+
+.user-short-card-name {
+    font-family: Raleway-Medium;
+    font-size: var(--font-size-md);
+    color: var(--color-grey);
+}
+
+.user-short-card-email, .user-short-card-birthdate {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+} 
+
+.user-short-card-label {
+    font-family: Raleway-Medium;
+    font-size: var(--font-size-sm);
+    color: var(--color-lgrey);
+}
+
+.user-short-card-text {
+    font-family: Roboto-Regular;
+    font-size: var(--font-size-sm);
+    color: var(--color-grey);
+}
